@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:avilatek_prueba_tecnica/config/theme/ui_extension.dart';
 import 'package:avilatek_prueba_tecnica/core/ui/utils/ui_strings.dart';
 import 'package:avilatek_prueba_tecnica/core/ui/widgets/basic_appbar.dart';
@@ -48,16 +50,13 @@ class _ThemeSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Tema'.toUpperCase(),
+          UIStrings.theme.toUpperCase(),
           style: context.textTheme.titleSmall,
         ),
         const SizedBox(height: 4.0),
         Container(
           padding: const EdgeInsets.all(16.0),
-          decoration: BoxDecoration(
-            color: context.colorScheme.surface,
-            borderRadius: BorderRadius.circular(7)
-          ),
+          decoration: BoxDecoration(color: context.colorScheme.surface, borderRadius: BorderRadius.circular(7)),
           child: const _ThemeSelector(),
         ),
       ],
@@ -76,14 +75,14 @@ class _ThemeSelector extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _ThemeCard(
-          icon: Icons.dark_mode,
-          label: 'Oscuro',
+          icon: Icons.nightlight_round_sharp,
+          label: UIStrings.dark,
           isSelected: themeSate.isDarkMode,
           onTap: () => context.read<ThemeBloc>().add(OnDarkModeSelected()),
         ),
         _ThemeCard(
           icon: Icons.light_mode,
-          label: 'Claro',
+          label: UIStrings.light,
           isSelected: !themeSate.isDarkMode,
           onTap: () => context.read<ThemeBloc>().add(OnLightModeSelected()),
         )
@@ -113,7 +112,7 @@ class _ThemeCard extends StatelessWidget {
         width: 110,
         duration: const Duration(milliseconds: 200),
         decoration: BoxDecoration(
-          color: context.colorScheme.surface,
+          color: isSelected ? context.colorScheme.onSecondaryContainer : context.colorScheme.surface,
           borderRadius: BorderRadius.circular(10.0),
           border: Border.all(
             color: isSelected ? context.colorScheme.primary : context.colorScheme.background,
@@ -125,15 +124,21 @@ class _ThemeCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(
-              icon,
-              size: 40,
-              color: context.colorScheme.secondary,
+            AnimatedIcon(
+              isSelected: isSelected,
+              icon: Icon(
+                icon,
+                size: 40,
+                color: isSelected ? context.colorScheme.primary : context.colorScheme.background,
+              ),
             ),
             const SizedBox(
-              height: 8.0,
+              height: 16.0,
             ),
-            Text(label),
+            Text(
+              label,
+              style: context.textTheme.bodyMedium,
+            ),
             const SizedBox(
               height: 8.0,
             ),
@@ -141,6 +146,60 @@ class _ThemeCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class AnimatedIcon extends StatefulWidget {
+  final bool isSelected;
+  final Icon icon;
+  final double angle;
+
+  const AnimatedIcon({
+    super.key,
+    required this.isSelected,
+    required this.icon,
+    this.angle = -pi / 4,
+  });
+
+  @override
+  State<AnimatedIcon> createState() => _AnimatedIconState();
+}
+
+class _AnimatedIconState extends State<AnimatedIcon> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _rotateAnim;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+    _rotateAnim = Tween(begin: 0.0, end: widget.angle).animate(_controller);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!widget.isSelected) _controller.value = 0.0;
+    if (widget.isSelected) _controller.forward();
+
+    return AnimatedBuilder(
+      animation: _rotateAnim,
+      builder: (context, child) {
+        return Transform.rotate(
+          angle: _rotateAnim.value,
+          child: child,
+        );
+      },
+      child: widget.icon,
     );
   }
 }
@@ -156,7 +215,7 @@ class _SelectedThemeIcon extends StatelessWidget {
       height: 20,
       width: 20,
       decoration: BoxDecoration(
-        color: isSelected ? context.colorScheme.secondary : context.colorScheme.background,
+        color: isSelected ? context.colorScheme.primary : context.colorScheme.background,
         borderRadius: BorderRadius.circular(20),
       ),
       duration: const Duration(milliseconds: 200),

@@ -117,15 +117,15 @@ class _NavigationDrawerHeader extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(24.0),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            context.colorScheme.onSecondaryContainer,
+            AppColors.violet950,
             Colors.black,
           ],
-          stops: const [0.4, 1],
+          stops: [0.4, 1],
         ),
       ),
       child: const _UserItem(),

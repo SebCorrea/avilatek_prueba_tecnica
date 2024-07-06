@@ -12,7 +12,7 @@ class AppColorScheme {
         secondary: AppColors.violet500,
         onSecondary: AppColors.white100,
         secondaryContainer: AppColors.violet300,
-        onSecondaryContainer: AppColors.violet950,
+        onSecondaryContainer: AppColors.indigo200,
         errorContainer: AppColors.red200,
         error: AppColors.red600,
         onError: AppColors.red900,

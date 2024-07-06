@@ -10,4 +10,11 @@ class UIStrings {
   static const String series = 'Series';
   static const String movies = 'Películas';
   static const String configuration = 'Configuración';
+
+/*Config Screen*/
+  static const String theme = 'Tema';
+  static const String dark = 'Oscuro';
+  static const String light = 'Claro';
+
+
 }
