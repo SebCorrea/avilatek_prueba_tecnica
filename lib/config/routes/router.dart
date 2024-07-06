@@ -7,7 +7,7 @@ import '../../features/favorite_movies/ui/screens/favorite_movies_screen.dart';
 import '../../features/home/ui/screens/home_screen.dart';
 
 final appRouter = GoRouter(
-  initialLocation: AppRoutes.configuration,
+  initialLocation: AppRoutes.home,
   routes: [
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
