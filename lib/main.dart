@@ -1,9 +1,15 @@
 import 'package:avilatek_prueba_tecnica/config/routes/router.dart';
+import 'package:avilatek_prueba_tecnica/core/services/dot_env/dot_env_service.dart';
 import 'package:avilatek_prueba_tecnica/features/configuration/ui/blocs/theme_bloc/theme_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
+import 'core/services/get_it/injection_service.dart';
+
+void main() async {
+  await DotEnvService.init();
+  await injector.injectAll();
+
   runApp(
     BlocProvider(
       create: (_) => ThemeBloc(),

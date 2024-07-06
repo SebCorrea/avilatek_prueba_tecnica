@@ -28,6 +28,7 @@ flutter:
   assets:
     - assets/svgs/
     - assets/images/
+    - .env
   fonts:
     - family: MenuIcons
       fonts:
