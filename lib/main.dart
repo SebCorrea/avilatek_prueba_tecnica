@@ -1,0 +1,27 @@
+import 'package:avilatek_prueba_tecnica/config/routes/router.dart';
+import 'package:avilatek_prueba_tecnica/features/configuration/ui/blocs/theme_bloc/theme_bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+void main() {
+  runApp(
+    BlocProvider(
+      create: (_) => ThemeBloc(),
+      child: const MainApp(),
+    ),
+  );
+}
+
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final themeSate = context.watch<ThemeBloc>().state;
+    return MaterialApp.router(
+      routerConfig: appRouter,
+      debugShowCheckedModeBanner: false,
+      theme: themeSate.appTheme.build(context),
+    );
+  }
+}
