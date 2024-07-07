@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'core/services/get_it/injection_service.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await DotEnvService.init();
   await injector.injectAll();
 
