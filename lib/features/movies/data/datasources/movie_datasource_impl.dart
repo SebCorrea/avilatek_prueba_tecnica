@@ -42,7 +42,6 @@ class MovieDatasourceImpl extends MovieDatasource {
       final error = DioExceptionHandler().handle(e);
       return Failure(error);
     } catch (e) {
-      print(e);
       return Failure(NetworkError.unknown);
     }
   }

@@ -3,31 +3,31 @@ import 'package:flutter/material.dart';
 
 import '../../../../config/theme/app_colors.dart';
 import '../../../../core/ui/widgets/fade_in_animation.dart';
-import '../../domain/entities/movie.dart';
+import '../../domain/entities/actor.dart';
 
-class MovieItem extends StatelessWidget {
-  final Movie movie;
-  final void Function(Movie movie) onClickMovie;
+class ActorItem extends StatelessWidget {
+  final Actor actor;
+  final void Function(Actor actor) onClickActor;
 
-  const MovieItem({
+  const ActorItem({
     super.key,
-    required this.movie,
-    required this.onClickMovie,
+    required this.actor,
+    required this.onClickActor,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => onClickMovie(movie),
+      onTap: () => onClickActor(actor),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Stack(
           fit: StackFit.expand,
           children: [
-            MovieImage(movie: movie),
+            _ActorImage(actor: actor),
             const _BackgroundGradient(),
-            _MovieInfo(
-              movie: movie,
+            _ActorInfo(
+              actor: actor,
             ),
           ],
         ),
@@ -36,21 +36,20 @@ class MovieItem extends StatelessWidget {
   }
 }
 
-class MovieImage extends StatelessWidget {
-  final Movie movie;
+class _ActorImage extends StatelessWidget {
+  final Actor actor;
 
-  const MovieImage({super.key, required this.movie});
+  const _ActorImage({required this.actor});
 
   @override
   Widget build(BuildContext context) {
     return Image.network(
-      movie.posterPath,
+      actor.profilePath,
       fit: BoxFit.cover,
       errorBuilder: (context, error, stackTrace) {
         return Image.network(
-          fit: BoxFit.cover,
-          'https://linnea.com.ar/wp-content/uploads/2018/09/404PosterNotFound.jpg',
-        );
+            fit: BoxFit.cover,
+            'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png');
       },
       loadingBuilder: (context, child, loadingProgress) {
         if (loadingProgress != null) {
@@ -80,10 +79,10 @@ class _BackgroundGradient extends StatelessWidget {
   }
 }
 
-class _MovieInfo extends StatelessWidget {
-  final Movie movie;
+class _ActorInfo extends StatelessWidget {
+  final Actor actor;
 
-  const _MovieInfo({required this.movie});
+  const _ActorInfo({required this.actor});
 
   @override
   Widget build(BuildContext context) {
@@ -94,13 +93,13 @@ class _MovieInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            movie.title,
+            actor.name,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: context.textTheme.titleMedium!.copyWith(color: AppColors.white50),
           ),
           Text(
-            '${(movie.voteAverage * 10).toStringAsFixed(0)}% User Score',
+            actor.character,
             style: context.textTheme.bodySmall!.copyWith(color: AppColors.white200),
           ),
         ],

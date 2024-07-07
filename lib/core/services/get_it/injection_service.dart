@@ -1,6 +1,10 @@
 import 'package:avilatek_prueba_tecnica/config/constants/environment.dart';
 import 'package:avilatek_prueba_tecnica/core/services/dot_env/dot_env_service.dart';
 import 'package:avilatek_prueba_tecnica/core/services/get_it/instance_names.dart';
+import 'package:avilatek_prueba_tecnica/features/actors/data/repositories/actor_repository_impl.dart';
+import 'package:avilatek_prueba_tecnica/features/actors/domain/datasources/actor_datasource.dart';
+import 'package:avilatek_prueba_tecnica/features/actors/domain/repositories/actor_repository.dart';
+import 'package:avilatek_prueba_tecnica/features/actors/ui/blocs/actors_bloc/actors_bloc.dart';
 import 'package:avilatek_prueba_tecnica/features/movies/data/datasources/movie_datasource_impl.dart';
 import 'package:avilatek_prueba_tecnica/features/movies/data/repositories/movie_repository_impl.dart';
 import 'package:avilatek_prueba_tecnica/features/movies/domain/datasources/movie_datasource.dart';
@@ -10,11 +14,17 @@ import 'package:avilatek_prueba_tecnica/features/movies/domain/usecases/get_popu
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../../features/actors/data/datasources/actor_datasource_impl.dart';
+import '../../../features/actors/domain/usecases/get_actor_by_movie_id_usecase.dart';
 import '../../../features/movies/ui/blocs/movie_details_bloc/movie_details_bloc.dart';
 import '../../../features/movies/ui/blocs/popular_movies_bloc/popular_movies_bloc.dart';
 
 final Injector injector = Injector(
-  services: [CommonServices(), MoviesInjectionService()],
+  services: [
+    CommonServices(),
+    MoviesInjectionService(),
+    ActorsInjectionService(),
+  ],
 );
 
 class Injector {
@@ -65,5 +75,17 @@ class MoviesInjectionService extends InjectionService {
     /*Movie*/
     getIt.registerSingleton<GetMovieByIdUseCase>(GetMovieByIdUseCase(movieRepository: getIt()));
     getIt.registerFactory<MovieDetailsBloc>(() => MovieDetailsBloc(getMovieByIdUseCase: getIt()));
+  }
+}
+
+class ActorsInjectionService extends InjectionService {
+  @override
+  Future<void> inject() async {
+    getIt.registerSingleton<ActorDatasource>(ActorDatasourceImpl(dio: getIt(instanceName: InstanceNames.dioMovieDb)));
+    getIt.registerSingleton<ActorRepository>(ActorRepositoryImpl(actorDatasource: getIt()));
+
+    /*Actors*/
+    getIt.registerSingleton<GetActorByMovieIdUseCase>(GetActorByMovieIdUseCase(actorRepository: getIt()));
+    getIt.registerFactory<ActorsBloc>(() => ActorsBloc(getActorByMovieIdUseCase: getIt()));
   }
 }
