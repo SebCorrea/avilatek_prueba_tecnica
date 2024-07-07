@@ -8,22 +8,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/usecases/get_popular_movies_usecase.dart';
 
-part 'get_popular_movies_event.dart';
+part 'popular_movies_event.dart';
 
-part 'get_popular_movies_state.dart';
+part 'popular_movies_state.dart';
 
-class GetPopularMoviesBloc extends Bloc<GetPopularMoviesEvent, GetPopularMoviesState> {
+class PopularMoviesBloc extends Bloc<PopularMoviesEvent, PopularMoviesState> {
   final GetPopularMoviesUseCase _getPopularMoviesUseCase;
 
-  GetPopularMoviesBloc({
+  PopularMoviesBloc({
     required GetPopularMoviesUseCase getPopularMoviesUseCase,
   })  : _getPopularMoviesUseCase = getPopularMoviesUseCase,
-        super(const GetPopularMoviesState()) {
+        super(const PopularMoviesState()) {
     on<GetPopularMovies>(_getPopularMovies);
     on<LoadNextPage>(_loadNextPage);
   }
 
-  Future<void> _getPopularMovies(GetPopularMovies event, Emitter<GetPopularMoviesState> emit) async {
+  Future<void> _getPopularMovies(GetPopularMovies event, Emitter<PopularMoviesState> emit) async {
     emit(
       state._copyWith(
         isLoading: true,
@@ -36,7 +36,8 @@ class GetPopularMoviesBloc extends Bloc<GetPopularMoviesEvent, GetPopularMoviesS
       emit(
         state._copyWith(
           isLoading: false,
-          errorMessage: null,
+          errorTitle: null,
+          errorDescription: null,
           isError: false,
           movies: response.data,
         ),
@@ -47,14 +48,15 @@ class GetPopularMoviesBloc extends Bloc<GetPopularMoviesEvent, GetPopularMoviesS
       emit(
         state._copyWith(
           isLoading: false,
-          errorMessage: response.error!.errorMessage,
+          errorTitle: response.error!.errorTitle,
+          errorDescription: response.error!.errorDescription,
           isError: true,
         ),
       );
     }
   }
 
-  Future<void> _loadNextPage(LoadNextPage event, Emitter<GetPopularMoviesState> emit) async {
+  Future<void> _loadNextPage(LoadNextPage event, Emitter<PopularMoviesState> emit) async {
     if (state.isNextPageLoading) return;
     emit(state._copyWith(isNextPageLoading: true, currentPage: state.currentPage + 1));
     final response = await _getPopularMoviesUseCase.execute(state.currentPage);

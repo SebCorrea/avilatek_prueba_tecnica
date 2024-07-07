@@ -22,7 +22,11 @@ class AppColors {
   /*Error*/
   static const Color red600 = Color(0xffCB2A2A);
   static const Color red200 = Color(0xfffccccc);
+  static const Color red400 = Color(0xfff27777);
+  static const Color red800 = Color(0xff932121);
   static const Color red900 = Color(0xff7b2121);
+  static const Color red950 = Color(0xff420d0d);
+
 
   /*Outlined*/
   static const Color white200 = Color(0xffd7d7d7);

@@ -7,11 +7,13 @@ import 'movie_item.dart';
 class MovieMasonry extends StatefulWidget {
   final List<Movie> movies;
   final VoidCallback? loadNextPage;
+  final void Function(Movie movie) onClickMovie;
 
   const MovieMasonry({
     super.key,
     required this.movies,
     this.loadNextPage,
+    required this.onClickMovie,
   });
 
   @override
@@ -52,7 +54,10 @@ class _MovieMasonryState extends State<MovieMasonry> {
         return Container(
           margin: EdgeInsets.only(top: index == 1 ? 24.0 : 0.0),
           height: 250,
-          child: MovieItem(movie: movie),
+          child: MovieItem(
+            movie: movie,
+            onClickMovie: widget.onClickMovie,
+          ),
         );
       },
     );

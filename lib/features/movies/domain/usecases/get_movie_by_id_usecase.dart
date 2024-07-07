@@ -5,15 +5,15 @@ import '../../../../core/domain/errors/data_error.dart';
 import '../../../../core/domain/resources/result.dart';
 import '../../../../core/domain/resources/usecase.dart';
 
-class GetPopularMoviesUseCase extends UseCase<Future<Result<List<Movie>, DataError>>, int> {
+class GetMovieByIdUseCase extends UseCase<Future<Result<Movie, DataError>>, int> {
   final MovieRepository _movieRepository;
 
-  GetPopularMoviesUseCase({
+  GetMovieByIdUseCase({
     required MovieRepository movieRepository,
   }) : _movieRepository = movieRepository;
 
   @override
-  Future<Result<List<Movie>, DataError>> execute(int params) {
-    return _movieRepository.getPopularMovies(params);
+  Future<Result<Movie, DataError>> execute(int params) {
+    return _movieRepository.getMovieById(params);
   }
 }

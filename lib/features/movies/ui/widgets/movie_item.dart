@@ -7,22 +7,30 @@ import '../../domain/entities/movie.dart';
 
 class MovieItem extends StatelessWidget {
   final Movie movie;
+  final void Function(Movie movie) onClickMovie;
 
-  const MovieItem({super.key, required this.movie});
+  const MovieItem({
+    super.key,
+    required this.movie,
+    required this.onClickMovie,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(10),
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          MovieImage(movie: movie),
-          const _BackgroundGradient(),
-          _MovieInfo(
-            movie: movie,
-          ),
-        ],
+    return GestureDetector(
+      onTap: () => onClickMovie(movie),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            MovieImage(movie: movie),
+            const _BackgroundGradient(),
+            _MovieInfo(
+              movie: movie,
+            ),
+          ],
+        ),
       ),
     );
   }

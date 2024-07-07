@@ -1,4 +1,5 @@
 import 'package:avilatek_prueba_tecnica/config/routes/routes.dart';
+import 'package:avilatek_prueba_tecnica/features/movies/ui/screens/movie_details_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/ui/menus/navigation_drawer_scaffold.dart';
@@ -44,11 +45,17 @@ final appRouter = GoRouter(
           routes: [
             GoRoute(
               path: AppRoutes.configuration,
-              builder: (context, state) =>  const ConfigurationScreen(),
+              builder: (context, state) => const ConfigurationScreen(),
             ),
           ],
         ),
       ],
+    ),
+    GoRoute(
+      path: '${AppRoutes.movies}/:id',
+      builder: (context, state) => MovieDetailsScreen(
+        movieId: int.parse(state.pathParameters['id'] ?? '-1'),
+      ),
     ),
   ],
 );

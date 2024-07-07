@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 class FadeInAnimation extends StatelessWidget {
   final Widget child;
 
-  const FadeInAnimation({super.key, required this.child});
+  const FadeInAnimation({
+    super.key,
+    required this.child,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,35 +1,39 @@
-part of 'get_popular_movies_bloc.dart';
+part of 'popular_movies_bloc.dart';
 
-class GetPopularMoviesState extends Equatable {
+class PopularMoviesState extends Equatable {
   final List<Movie> movies;
   final bool isLoading;
   final bool isError;
-  final String? errorMessage;
+  final String? errorTitle;
+  final String? errorDescription;
   final int currentPage;
   final bool isNextPageLoading;
 
-  const GetPopularMoviesState({
+  const PopularMoviesState({
     this.movies = const [],
     this.isLoading = true,
     this.isError = false,
     this.currentPage = 1,
     this.isNextPageLoading = false,
-    this.errorMessage,
+    this.errorTitle,
+    this.errorDescription,
   });
 
-  GetPopularMoviesState _copyWith({
+  PopularMoviesState _copyWith({
     List<Movie>? movies,
     bool? isLoading,
     bool? isError,
-    String? errorMessage,
+    String? errorTitle,
+    String? errorDescription,
     int? currentPage,
     bool? isNextPageLoading,
   }) =>
-      GetPopularMoviesState(
+      PopularMoviesState(
         movies: movies ?? this.movies,
         isLoading: isLoading ?? this.isLoading,
         isError: isError ?? this.isError,
-        errorMessage: errorMessage ?? this.errorMessage,
+        errorDescription: errorDescription ?? this.errorDescription,
+        errorTitle: errorTitle ?? this.errorTitle,
         currentPage: currentPage ?? this.currentPage,
         isNextPageLoading: isNextPageLoading ?? this.isNextPageLoading,
       );
@@ -39,7 +43,8 @@ class GetPopularMoviesState extends Equatable {
         movies,
         isLoading,
         isError,
-        errorMessage,
+        errorTitle,
+        errorDescription,
         currentPage,
         isNextPageLoading,
       ];

@@ -5,10 +5,13 @@ import 'package:avilatek_prueba_tecnica/features/movies/data/datasources/movie_d
 import 'package:avilatek_prueba_tecnica/features/movies/data/repositories/movie_repository_impl.dart';
 import 'package:avilatek_prueba_tecnica/features/movies/domain/datasources/movie_datasource.dart';
 import 'package:avilatek_prueba_tecnica/features/movies/domain/repositories/movie_repository.dart';
+import 'package:avilatek_prueba_tecnica/features/movies/domain/usecases/get_movie_by_id_usecase.dart';
 import 'package:avilatek_prueba_tecnica/features/movies/domain/usecases/get_popular_movies_usecase.dart';
-import 'package:avilatek_prueba_tecnica/features/movies/ui/blocs/get_popular_movies_bloc/get_popular_movies_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+
+import '../../../features/movies/ui/blocs/movie_details_bloc/movie_details_bloc.dart';
+import '../../../features/movies/ui/blocs/popular_movies_bloc/popular_movies_bloc.dart';
 
 final Injector injector = Injector(
   services: [CommonServices(), MoviesInjectionService()],
@@ -55,8 +58,12 @@ class MoviesInjectionService extends InjectionService {
     getIt.registerSingleton<MovieDatasource>(MovieDatasourceImpl(dio: getIt(instanceName: InstanceNames.dioMovieDb)));
     getIt.registerSingleton<MovieRepository>(MovieRepositoryImpl(movieDatasource: getIt()));
 
-    /*PopularMovies*/
+    /*Popular Movies*/
     getIt.registerSingleton<GetPopularMoviesUseCase>(GetPopularMoviesUseCase(movieRepository: getIt()));
-    getIt.registerFactory<GetPopularMoviesBloc>(() => GetPopularMoviesBloc(getPopularMoviesUseCase: getIt()));
+    getIt.registerFactory<PopularMoviesBloc>(() => PopularMoviesBloc(getPopularMoviesUseCase: getIt()));
+
+    /*Movie*/
+    getIt.registerSingleton<GetMovieByIdUseCase>(GetMovieByIdUseCase(movieRepository: getIt()));
+    getIt.registerFactory<MovieDetailsBloc>(() => MovieDetailsBloc(getMovieByIdUseCase: getIt()));
   }
 }

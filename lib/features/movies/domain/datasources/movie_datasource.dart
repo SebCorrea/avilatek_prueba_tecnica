@@ -4,5 +4,7 @@ import '../../../../core/domain/resources/result.dart';
 import '../entities/movie.dart';
 
 abstract class MovieDatasource {
-  Future<Result<List<Movie>, DataError>> getPopularMovies({int page = 1});
+  Future<Result<List<Movie>, DataError>> getPopularMovies(int page);
+
+  Future<Result<Movie, DataError>> getMovieById(int id);
 }

@@ -6,7 +6,7 @@ class MovieMapper {
         backdropPath: json["backdrop_path"] != ''
             ? 'https://image.tmdb.org/t/p/w500${json["backdrop_path"]}'
             : 'https://linnea.com.ar/wp-content/uploads/2018/09/404PosterNotFound.jpg',
-        genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
+        genreIds: json["genre_ids"] == null ? [] : List<int>.from(json["genre_ids"].map((x) => x)),
         id: json["id"],
         originalLanguage: json["original_language"],
         originalTitle: json["original_title"],
