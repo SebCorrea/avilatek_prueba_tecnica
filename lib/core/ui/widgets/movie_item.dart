@@ -1,9 +1,9 @@
 import 'package:avilatek_prueba_tecnica/config/theme/ui_extension.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../config/theme/app_colors.dart';
-import '../../../../core/ui/widgets/fade_in_animation.dart';
-import '../../domain/entities/movie.dart';
+import '../../../config/theme/app_colors.dart';
+import 'fade_in_animation.dart';
+import '../../../features/movies/domain/entities/movie.dart';
 
 class MovieItem extends StatelessWidget {
   final Movie movie;

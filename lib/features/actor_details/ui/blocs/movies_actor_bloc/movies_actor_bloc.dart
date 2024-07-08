@@ -1,32 +1,34 @@
+import 'dart:async';
+
 import 'package:avilatek_prueba_tecnica/core/ui/utils/errors_extension.dart';
-import 'package:avilatek_prueba_tecnica/features/actors/domain/entities/actor.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/domain/resources/result.dart';
-import '../../../domain/usecases/get_actor_by_movie_id_usecase.dart';
+import '../../../../movies/domain/entities/movie.dart';
+import '../../../../movies/domain/usecases/get_movies_by_actor_id.dart';
 
-part 'actors_event.dart';
+part 'movies_actor_event.dart';
 
-part 'actors_state.dart';
+part 'movies_actor_state.dart';
 
-class ActorsBloc extends Bloc<ActorsEvent, ActorsState> {
-  final GetActorByMovieIdUseCase _getActorByMovieIdUseCase;
+class MoviesActorBloc extends Bloc<MoviesActorEvent, MoviesActorState> {
+  final GetMoviesByActorIdUseCase _getMoviesByActorIdUseCase;
 
-  ActorsBloc({required GetActorByMovieIdUseCase getActorByMovieIdUseCase})
-      : _getActorByMovieIdUseCase = getActorByMovieIdUseCase,
-        super(const ActorsState()) {
-    on<GetActors>(_onGetActor);
+  MoviesActorBloc({required GetMoviesByActorIdUseCase getMoviesByActorIdUseCase})
+      : _getMoviesByActorIdUseCase = getMoviesByActorIdUseCase,
+        super(const MoviesActorState()) {
+    on<GetMoviesByActorId>(_onGetMoviesByActorId);
   }
 
-  Future<void> _onGetActor(GetActors event, Emitter<ActorsState> emit) async {
+  Future<void> _onGetMoviesByActorId(GetMoviesByActorId event, Emitter<MoviesActorState> emit) async {
     emit(
       state._copyWith(
         isLoading: true,
       ),
     );
 
-    final response = await _getActorByMovieIdUseCase.execute(event.movieId);
+    final response = await _getMoviesByActorIdUseCase.execute(event.actorId);
 
     if (response is Success && response.data != null) {
       emit(
@@ -35,7 +37,7 @@ class ActorsBloc extends Bloc<ActorsEvent, ActorsState> {
           errorTitle: null,
           errorDescription: null,
           isError: false,
-          actors: response.data,
+          movies: response.data,
         ),
       );
     }

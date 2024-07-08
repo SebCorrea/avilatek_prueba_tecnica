@@ -10,11 +10,16 @@ class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: context.colorScheme.background,
       title: Text(
         title ?? '',
-        style: context.textTheme.titleLarge,
+        style: context.textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold),
       ),
-      leading: leading,
+      centerTitle: true,
+      leading: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: leading,
+      ),
     );
   }
 

@@ -6,5 +6,4 @@ import '../../../../core/domain/resources/result.dart';
 abstract class ActorRepository {
   Future<Result<List<Actor>, DataError>> getActorsByMovieId(int movieId);
 
-  Future<Result<Actor, DataError>> getActorById(int actorId);
 }

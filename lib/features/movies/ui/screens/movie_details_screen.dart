@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../config/routes/routes.dart';
 import '../../../../config/theme/app_colors.dart';
 import '../../../../core/ui/widgets/fade_in_animation.dart';
 import '../../../../core/ui/widgets/full_screen_error.dart';
@@ -61,13 +62,19 @@ class _MovieDetailsView extends StatelessWidget {
         children: [
           _FullScreenImage(movie: getMovieBlocState.movie!),
           const _BackgroundGradients(),
-          _ShowInfoAnimated(
-            showMovieInfo: getMovieBlocState.showMovieInfo,
-            child: _InfoSection(
-              movie: getMovieBlocState.movie!,
-              actors: getActorsBlocState.actors,
+          IgnorePointer(
+            ignoring: !getMovieBlocState.showMovieInfo,
+            child: AnimatedOpacity(
+              curve: Curves.fastOutSlowIn,
+              opacity: getMovieBlocState.showMovieInfo ? 1.0 : 0.0,
+              duration: const Duration(milliseconds: 500),
+              child: _InfoSection(
+                movie: getMovieBlocState.movie!,
+                actors: getActorsBlocState.actors,
+              ),
             ),
           ),
+
           Positioned(
             top: 36,
             left: 24,
@@ -86,7 +93,10 @@ class _InfoSection extends StatelessWidget {
   final Movie movie;
   final List<Actor> actors;
 
-  const _InfoSection({required this.movie, required this.actors});
+  const _InfoSection({
+    required this.movie,
+    required this.actors,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +111,7 @@ class _InfoSection extends StatelessWidget {
                 Colors.black,
                 Colors.transparent,
               ],
-              stops: [0, 0.3],
+              stops: [0, 0.4],
             ),
           ),
         ),
@@ -110,56 +120,6 @@ class _InfoSection extends StatelessWidget {
           actors: actors,
         ),
       ],
-    );
-  }
-}
-
-class _ShowInfoAnimated extends StatefulWidget {
-  final bool showMovieInfo;
-  final Widget child;
-
-  const _ShowInfoAnimated({
-    required this.showMovieInfo,
-    required this.child,
-  });
-
-  @override
-  State<_ShowInfoAnimated> createState() => __ShowInfoAnimatedState();
-}
-
-class __ShowInfoAnimatedState extends State<_ShowInfoAnimated> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _opacityAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
-    _opacityAnimation = Tween(begin: 0.0, end: 1.0).animate(_controller);
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (widget.showMovieInfo) {
-      _controller.forward();
-    } else {
-      _controller.reverse();
-    }
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, child) {
-        return Opacity(
-          opacity: _opacityAnimation.value,
-          child: child,
-        );
-      },
-      child: widget.child,
     );
   }
 }
@@ -185,6 +145,9 @@ class _MovieInfoSection extends StatelessWidget {
         ),
         ActorsHorizontalListView(
           actors: actors,
+          onClickActor: (Actor actor) => context.push(
+            '${AppRoutes.actor}/${actor.id}',
+          ),
         )
       ],
     );
@@ -224,8 +187,13 @@ class _MovieInfo extends StatelessWidget {
 
 class ActorsHorizontalListView extends StatelessWidget {
   final List<Actor> actors;
+  final Function(Actor actor) onClickActor;
 
-  const ActorsHorizontalListView({super.key, required this.actors});
+  const ActorsHorizontalListView({
+    super.key,
+    required this.actors,
+    required this.onClickActor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -242,10 +210,11 @@ class ActorsHorizontalListView extends StatelessWidget {
             final actor = actors[index];
             return Container(
               width: 130,
+              color: context.colorScheme.surface,
               margin: const EdgeInsets.only(right: 10.0),
               child: ActorItem(
                 actor: actor,
-                onClickActor: (Actor actor) {},
+                onClickActor: onClickActor,
               ),
             );
           },

@@ -3,6 +3,7 @@ import 'package:avilatek_prueba_tecnica/features/movies/ui/screens/movie_details
 import 'package:go_router/go_router.dart';
 
 import '../../core/ui/menus/navigation_drawer_scaffold.dart';
+import '../../features/actor_details/ui/screens/actor_details_screen.dart';
 import '../../features/configuration/ui/screens/configuration_screen.dart';
 import '../../features/favorite_movies/ui/screens/favorite_movies_screen.dart';
 import '../../features/movies/ui/screens/home_screen.dart';
@@ -55,6 +56,13 @@ final appRouter = GoRouter(
       path: '${AppRoutes.movies}/:id',
       builder: (context, state) => MovieDetailsScreen(
         movieId: int.parse(state.pathParameters['id'] ?? '-1'),
+      ),
+    ),
+
+    GoRoute(
+      path: '${AppRoutes.actor}/:id',
+      builder: (context, state) => ActorDetailsScreen(
+        actorId: int.parse(state.pathParameters['id'] ?? '-1'),
       ),
     ),
   ],

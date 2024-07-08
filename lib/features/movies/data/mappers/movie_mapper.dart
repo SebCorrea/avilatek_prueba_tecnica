@@ -11,7 +11,7 @@ class MovieMapper {
         overview: json["overview"],
         popularity: json["popularity"]?.toDouble(),
         posterPath: 'https://image.tmdb.org/t/p/w500${json["poster_path"]}',
-        releaseDate: DateTime.parse(json["release_date"]),
+        releaseDate: json["release_date"] == '' ? null : DateTime.parse(json["release_date"]),
         title: json["title"],
         video: json["video"],
         voteAverage: json["vote_average"]?.toDouble(),

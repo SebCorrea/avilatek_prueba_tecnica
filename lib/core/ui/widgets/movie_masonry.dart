@@ -1,19 +1,26 @@
+import 'package:avilatek_prueba_tecnica/config/theme/ui_extension.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import '../../domain/entities/movie.dart';
+import '../../../features/movies/domain/entities/movie.dart';
 import 'movie_item.dart';
 
 class MovieMasonry extends StatefulWidget {
   final List<Movie> movies;
   final VoidCallback? loadNextPage;
   final void Function(Movie movie) onClickMovie;
+  final ScrollPhysics scrollPhysics;
+  final bool shrinkWrap;
 
   const MovieMasonry({
     super.key,
     required this.movies,
     this.loadNextPage,
     required this.onClickMovie,
+    this.scrollPhysics = const BouncingScrollPhysics(),
+    this.shrinkWrap = false,
   });
 
   @override
@@ -28,7 +35,7 @@ class _MovieMasonryState extends State<MovieMasonry> {
     super.initState();
     _scrollController.addListener(() {
       if (widget.loadNextPage == null) return;
-      if (_scrollController.position.pixels + 100 >= _scrollController.position.maxScrollExtent) {
+      if (_scrollController.position.pixels + 200 >= _scrollController.position.maxScrollExtent) {
         widget.loadNextPage!();
       }
     });
@@ -44,7 +51,8 @@ class _MovieMasonryState extends State<MovieMasonry> {
   Widget build(BuildContext context) {
     return MasonryGridView.count(
       controller: _scrollController,
-      physics: const BouncingScrollPhysics(),
+      shrinkWrap: widget.shrinkWrap,
+      physics: widget.scrollPhysics,
       itemCount: widget.movies.length,
       mainAxisSpacing: 36,
       crossAxisSpacing: 36,
@@ -54,6 +62,7 @@ class _MovieMasonryState extends State<MovieMasonry> {
         return Container(
           margin: EdgeInsets.only(top: index == 1 ? 24.0 : 0.0),
           height: 250,
+          color: context.colorScheme.surface,
           child: MovieItem(
             movie: movie,
             onClickMovie: widget.onClickMovie,

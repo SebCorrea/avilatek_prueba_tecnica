@@ -22,7 +22,10 @@ class CircularGradientIconButton extends StatelessWidget {
     return Container(
       width: size,
       height: size,
-      decoration: BoxDecoration(gradient: LinearGradient(colors: backgroundColors), shape: BoxShape.circle),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(colors: backgroundColors),
+        shape: BoxShape.circle,
+      ),
       child: IconButton(
         onPressed: onClick,
         style: IconButton.styleFrom(
@@ -31,7 +34,7 @@ class CircularGradientIconButton extends StatelessWidget {
         ),
         icon: Icon(
           iconData,
-          size: size/2,
+          size: size / 2,
           color: context.colorScheme.background,
         ),
       ),

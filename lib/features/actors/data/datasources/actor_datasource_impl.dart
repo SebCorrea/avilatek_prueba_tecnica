@@ -13,11 +13,6 @@ class ActorDatasourceImpl extends ActorDatasource {
   ActorDatasourceImpl({required Dio dio}) : _dio = dio;
 
   @override
-  Future<Result<Actor, DataError>> getActorById(int actorId) {
-    throw UnimplementedError();
-  }
-
-  @override
   Future<Result<List<Actor>, DataError>> getActorsByMovieId(int movieId) async {
     try {
       final response = await _dio.get('/movie/$movieId/credits');

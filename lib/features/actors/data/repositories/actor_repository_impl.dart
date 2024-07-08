@@ -12,11 +12,6 @@ class ActorRepositoryImpl extends ActorRepository {
   }) : _actorDatasource = actorDatasource;
 
   @override
-  Future<Result<Actor, DataError>> getActorById(int actorId) {
-    return _actorDatasource.getActorById(actorId);
-  }
-
-  @override
   Future<Result<List<Actor>, DataError>> getActorsByMovieId(int movieId) {
     return _actorDatasource.getActorsByMovieId(movieId);
   }
