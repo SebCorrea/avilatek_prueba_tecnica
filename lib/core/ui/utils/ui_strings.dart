@@ -7,8 +7,7 @@ class UIStrings {
 
   /*Menu Labels*/
   static const String home = 'Inicio';
-  static const String series = 'Series';
-  static const String movies = 'Películas';
+  static const String topRated = 'Mejor calificadas';
   static const String configuration = 'Configuración';
 
   /*Config Screen*/

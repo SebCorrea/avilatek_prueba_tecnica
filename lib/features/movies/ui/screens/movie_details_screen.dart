@@ -61,7 +61,19 @@ class _MovieDetailsView extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           _FullScreenImage(movie: getMovieBlocState.movie!),
-          const _BackgroundGradients(),
+          Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Colors.black54,
+                  Colors.transparent,
+                ],
+                stops: [0, 0.2],
+              ),
+            ),
+          ),
           IgnorePointer(
             ignoring: !getMovieBlocState.showMovieInfo,
             child: AnimatedOpacity(
@@ -224,30 +236,7 @@ class ActorsHorizontalListView extends StatelessWidget {
   }
 }
 
-class _BackgroundGradients extends StatelessWidget {
-  const _BackgroundGradients();
 
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Colors.black54,
-                Colors.transparent,
-              ],
-              stops: [0, 0.2],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
 
 class _FullScreenImage extends StatelessWidget {
   final Movie movie;

@@ -77,7 +77,7 @@ class _MenuItem extends StatelessWidget {
     final isSelectedItem = navigationShell.currentIndex == index;
     return Column(
       children: [
-        if (index == 3)
+        if (index == 2)
           Divider(
             thickness: 1,
             color: context.colorScheme.outline,

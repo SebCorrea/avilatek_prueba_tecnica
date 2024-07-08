@@ -173,13 +173,7 @@ class _ActorImage extends StatelessWidget {
           },
           loadingBuilder: (context, child, loadingProgress) {
             if (loadingProgress == null) return FadeInAnimation(child: child);
-            return Container(
-              alignment: Alignment.center,
-              height: 50,
-              width: 50,
-              color: Colors.amber,
-              //child: const CustomLoader(size: 20),
-            );
+            return child;
           },
         ),
       ),

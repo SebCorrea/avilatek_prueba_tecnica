@@ -1,11 +1,11 @@
 import 'package:avilatek_prueba_tecnica/config/routes/routes.dart';
 import 'package:avilatek_prueba_tecnica/features/movies/ui/screens/movie_details_screen.dart';
+import 'package:avilatek_prueba_tecnica/features/movies/ui/screens/top_rated_movies_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/ui/menus/navigation_drawer_scaffold.dart';
 import '../../features/actor_details/ui/screens/actor_details_screen.dart';
 import '../../features/configuration/ui/screens/configuration_screen.dart';
-import '../../features/favorite_movies/ui/screens/favorite_movies_screen.dart';
 import '../../features/movies/ui/screens/home_screen.dart';
 
 final appRouter = GoRouter(
@@ -29,16 +29,8 @@ final appRouter = GoRouter(
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: AppRoutes.series,
-              builder: (context, state) => const FavoriteMoviesScreen(),
-            ),
-          ],
-        ),
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: AppRoutes.series,
-              builder: (context, state) => const FavoriteMoviesScreen(),
+              path: AppRoutes.topRated,
+              builder: (context, state) => const TopRatedMoviesScreen(),
             ),
           ],
         ),

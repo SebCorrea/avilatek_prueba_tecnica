@@ -1,4 +1,5 @@
 import 'package:avilatek_prueba_tecnica/config/routes/routes.dart';
+import 'package:avilatek_prueba_tecnica/config/theme/ui_extension.dart';
 import 'package:avilatek_prueba_tecnica/core/services/get_it/injection_service.dart';
 import 'package:avilatek_prueba_tecnica/core/ui/widgets/circular_gradient_icon_button.dart';
 import 'package:avilatek_prueba_tecnica/core/ui/widgets/full_screen_error.dart';
@@ -28,7 +29,7 @@ class HomeScreen extends StatelessWidget {
         title: UIStrings.home,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(36.0),
+        padding: const EdgeInsets.symmetric(horizontal: 36.0),
         child: BlocProvider(
           create: (_) => getIt<PopularMoviesBloc>()..add(GetPopularMovies()),
           child: const _HomeView(),
@@ -54,16 +55,22 @@ class _HomeView extends StatelessWidget {
 
     if (popularMoviesBlocState.isLoading) return const FullScreenLoader();
 
-    return Column(
-      children: [
-        Expanded(
-          child: MovieMasonry(
-            movies: popularMoviesBlocState.movies,
-            loadNextPage: () => context.read<PopularMoviesBloc>().add(LoadNextPage()),
-            onClickMovie: (Movie movie) => context.push('${AppRoutes.movies}/${movie.id}'),
-          ),
-        ),
-      ],
+    return MovieMasonry(
+      movies: popularMoviesBlocState.movies,
+      loadNextPage: () => context.read<PopularMoviesBloc>().add(LoadNextPage()),
+      onClickMovie: (Movie movie) => context.push('${AppRoutes.movies}/${movie.id}'),
+    );
+  }
+}
+
+class MovieCarousel extends StatelessWidget {
+  const MovieCarousel({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return  SizedBox(
+       height: context.screenSize.height * 0.2,
+      child: Placeholder(),
     );
   }
 }

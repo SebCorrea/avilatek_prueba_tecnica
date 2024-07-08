@@ -21,14 +21,9 @@ final List<MenuItem> menuItems = [
     selectedIcon: CustomIcons.icFilledHome,
   ),
   MenuItem(
-    label: UIStrings.series,
-    unSelectedIcon: CustomIcons.icOutlinedSeries,
-    selectedIcon: CustomIcons.icFilledSeries,
-  ),
-  MenuItem(
-    label: UIStrings.movies,
-    unSelectedIcon: CustomIcons.icOutlinedMovie,
-    selectedIcon: CustomIcons.icFilledMovie,
+    label: UIStrings.topRated,
+    unSelectedIcon: Icons.star_border,
+    selectedIcon: Icons.star,
   ),
   MenuItem(
     label: UIStrings.configuration,
