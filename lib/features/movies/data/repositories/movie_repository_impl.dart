@@ -26,4 +26,9 @@ class MovieRepositoryImpl extends MovieRepository {
   Future<Result<List<Movie>, DataError>> getMoviesByActorId(int id) {
     return _movieDatasource.getMoviesByActorId(id);
   }
+
+  @override
+  Future<Result<List<Movie>, DataError>> getTopRatedMovies(int page) {
+    return _movieDatasource.getTopRatedMovies(page);
+  }
 }

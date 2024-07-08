@@ -60,4 +60,23 @@ class MovieDatasourceImpl extends MovieDatasource {
       return Failure(NetworkError.unknown);
     }
   }
+
+  @override
+  Future<Result<List<Movie>, DataError>> getTopRatedMovies(int page) async{
+    try {
+      final response = await _dio.get(
+        '/movie/top_rated',
+        queryParameters: {
+          'page': page,
+        },
+      );
+      final result = MovieResultsModel.fromJson(response.data);
+      return Success(result.movies);
+    } on DioException catch (e) {
+      final error = DioExceptionHandler().handle(e);
+      return Failure(error);
+    } catch (e) {
+      return Failure(NetworkError.unknown);
+    }
+  }
 }

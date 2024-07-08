@@ -14,6 +14,8 @@ import 'package:avilatek_prueba_tecnica/features/movies/domain/datasources/movie
 import 'package:avilatek_prueba_tecnica/features/movies/domain/repositories/movie_repository.dart';
 import 'package:avilatek_prueba_tecnica/features/movies/domain/usecases/get_movie_by_id_usecase.dart';
 import 'package:avilatek_prueba_tecnica/features/movies/domain/usecases/get_popular_movies_usecase.dart';
+import 'package:avilatek_prueba_tecnica/features/movies/domain/usecases/get_top_rated_movies.dart';
+import 'package:avilatek_prueba_tecnica/features/movies/ui/blocs/top_rated_movies_bloc/top_rated_movies_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -88,6 +90,11 @@ class MoviesInjectionService extends InjectionService {
     /*Movies by Actor*/
     getIt.registerSingleton<GetMoviesByActorIdUseCase>(GetMoviesByActorIdUseCase(movieRepository: getIt()));
     getIt.registerFactory<MoviesActorBloc>(() => MoviesActorBloc(getMoviesByActorIdUseCase: getIt()));
+
+    /*Top Rated Movies*/
+    getIt.registerSingleton<GetTopRatedMoviesUseCase>(GetTopRatedMoviesUseCase(movieRepository: getIt()));
+    getIt.registerFactory<TopRatedMoviesBloc>(() => TopRatedMoviesBloc(getTopRatedMoviesUseCase: getIt()));
+
   }
 }
 
@@ -110,7 +117,7 @@ class ActorDetailsInjectionService extends InjectionService {
         ActorDetailsDatasourceImpl(dio: getIt(instanceName: InstanceNames.dioMovieDb)));
     getIt.registerSingleton<ActorDetailsRepository>(ActorDetailsRepositoryImpl(actorDetailsDatasource: getIt()));
 
-    /*Popular Movies*/
+    /*Actor Details*/
     getIt.registerSingleton<GetActorDetailsByIdUseCase>(GetActorDetailsByIdUseCase(actorDetailsRepository: getIt()));
     getIt.registerFactory<ActorDetailsBloc>(() => ActorDetailsBloc(getActorDetailsByIdUseCase: getIt()));
   }

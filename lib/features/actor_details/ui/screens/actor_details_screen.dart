@@ -1,5 +1,6 @@
 import 'package:avilatek_prueba_tecnica/config/theme/ui_extension.dart';
 import 'package:avilatek_prueba_tecnica/core/services/get_it/injection_service.dart';
+import 'package:avilatek_prueba_tecnica/core/ui/utils/ui_strings.dart';
 import 'package:avilatek_prueba_tecnica/core/ui/widgets/basic_appbar.dart';
 import 'package:avilatek_prueba_tecnica/core/ui/widgets/circular_gradient_icon_button.dart';
 import 'package:avilatek_prueba_tecnica/core/ui/widgets/custom_loader.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../config/routes/routes.dart';
+import '../../../../core/ui/utils/img_paths.dart';
 import '../../../../core/ui/widgets/fade_in_animation.dart';
 import '../../../movies/domain/entities/movie.dart';
 import '../../../../core/ui/widgets/movie_masonry.dart';
@@ -30,7 +32,7 @@ class ActorDetailsScreen extends StatelessWidget {
           iconData: Icons.arrow_back_ios_new,
           onClick: () => context.pop(),
         ),
-        title: 'Actor',
+        title: UIStrings.actorLabel,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 36.0),
@@ -87,7 +89,7 @@ class _RelatedMovies extends StatelessWidget {
 
     if (moviesActorsBlocState.isError) {
       return ErrorMessage(
-        title: 'Error al cargar las películas',
+        title: UIStrings.loadMoviesErrorMessage,
         description: moviesActorsBlocState.errorDescription!,
       );
     }
@@ -95,7 +97,7 @@ class _RelatedMovies extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Participó en',
+          UIStrings.castedOnLabel,
           style: context.textTheme.displaySmall!.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 24.0),
@@ -128,7 +130,7 @@ class _ActorDetails extends StatelessWidget {
 
     if (actorDetailsBlocState.isError) {
       return ErrorMessage(
-        title: 'Error al cargar actor',
+        title: UIStrings.loadActorErrorMessage,
         description: actorDetailsBlocState.errorDescription!,
       );
     }
@@ -168,7 +170,7 @@ class _ActorImage extends StatelessWidget {
           errorBuilder: (context, error, stackTrace) {
             return Image.network(
               fit: BoxFit.cover,
-              'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+              NetworkImagesUrls.noUserImageUrl,
             );
           },
           loadingBuilder: (context, child, loadingProgress) {
@@ -197,7 +199,7 @@ class _ActorInfo extends StatelessWidget {
         ),
         const SizedBox(height: 8.0),
         Text(
-          actor.biography.isEmpty ? 'Este actor no cuenta con biografía...' : actor.biography,
+          actor.biography.isEmpty ? UIStrings.noBiographyMessage : actor.biography,
           style: context.textTheme.bodyMedium,
           maxLines: 5,
           overflow: TextOverflow.ellipsis,

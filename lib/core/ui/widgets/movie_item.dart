@@ -2,6 +2,8 @@ import 'package:avilatek_prueba_tecnica/config/theme/ui_extension.dart';
 import 'package:flutter/material.dart';
 
 import '../../../config/theme/app_colors.dart';
+import '../utils/img_paths.dart';
+import '../utils/ui_strings.dart';
 import 'fade_in_animation.dart';
 import '../../../features/movies/domain/entities/movie.dart';
 
@@ -49,7 +51,7 @@ class MovieImage extends StatelessWidget {
       errorBuilder: (context, error, stackTrace) {
         return Image.network(
           fit: BoxFit.cover,
-          'https://linnea.com.ar/wp-content/uploads/2018/09/404PosterNotFound.jpg',
+          NetworkImagesUrls.noPosterMovieUrl,
         );
       },
       loadingBuilder: (context, child, loadingProgress) {
@@ -100,7 +102,7 @@ class _MovieInfo extends StatelessWidget {
             style: context.textTheme.titleMedium!.copyWith(color: AppColors.white50),
           ),
           Text(
-            '${(movie.voteAverage * 10).toStringAsFixed(0)}% User Score',
+            UIStrings.replaceUIString(UIStrings.userScoreLabel, (movie.voteAverage * 10).toStringAsFixed(0)),
             style: context.textTheme.bodySmall!.copyWith(color: AppColors.white200),
           ),
         ],

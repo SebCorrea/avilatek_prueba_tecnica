@@ -21,10 +21,20 @@ class AutomaticPagedStarted extends TopRatedMoviesEvent {
 }
 
 class ListenIndex extends TopRatedMoviesEvent {
-  final int initialIndex;
+  final int index;
 
-  const ListenIndex(this.initialIndex);
+  const ListenIndex(this.index);
 
   @override
-  List<Object?> get props => [initialIndex];
+  List<Object?> get props => [index];
+}
+
+class GetTopRatedMovies extends TopRatedMoviesEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class LoadNextPage extends TopRatedMoviesEvent {
+  @override
+  List<Object?> get props => [];
 }

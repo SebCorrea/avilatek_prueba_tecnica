@@ -1,17 +1,23 @@
 import 'dart:math';
 
+import 'package:avilatek_prueba_tecnica/config/theme/app_colors.dart';
 import 'package:avilatek_prueba_tecnica/config/theme/ui_extension.dart';
 import 'package:avilatek_prueba_tecnica/features/movies/ui/blocs/top_rated_movies_bloc/top_rated_movies_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../config/routes/routes.dart';
 import '../../../../core/services/get_it/injection_service.dart';
+import '../../../../core/ui/utils/img_paths.dart';
 import '../../../../core/ui/utils/ui_strings.dart';
 import '../../../../core/ui/widgets/basic_appbar.dart';
 import '../../../../core/ui/widgets/circular_gradient_icon_button.dart';
 import '../../../../core/ui/widgets/fade_in_animation.dart';
+import '../../../../core/ui/widgets/full_screen_error.dart';
+import '../../../../core/ui/widgets/full_screen_loader.dart';
+import '../../../../core/ui/widgets/movie_masonry.dart';
 import '../../domain/entities/movie.dart';
-import '../blocs/popular_movies_bloc/popular_movies_bloc.dart';
 
 class TopRatedMoviesScreen extends StatelessWidget {
   const TopRatedMoviesScreen({super.key});
@@ -26,18 +32,18 @@ class TopRatedMoviesScreen extends StatelessWidget {
             Scaffold.of(context).openDrawer();
           },
         ),
-        title: UIStrings.home,
+        title: UIStrings.topRated,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 36.0),
         child: MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (_) => getIt<PopularMoviesBloc>()..add(GetPopularMovies()),
-            ),
-            BlocProvider(
-              create: (_) => TopRatedMoviesBloc()..add(const AutomaticPagedStarted()),
-            )
+                create: (_) => getIt<TopRatedMoviesBloc>()
+                  ..add(GetTopRatedMovies())
+                  ..add(const AutomaticPagedStarted())
+                //..add(const AutomaticPagedStarted()),
+                )
           ],
           child: const _TopRatedMoviesView(),
         ),
@@ -51,22 +57,63 @@ class _TopRatedMoviesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final moviesBloc = context.watch<PopularMoviesBloc>().state;
     final topRatedMoviesBloc = context.watch<TopRatedMoviesBloc>().state;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        _MoviesCarousel(
-          movies: moviesBloc.movies.take(3).toList(),
-          currentPage: topRatedMoviesBloc.selectedMovieIndex,
-        ),
-        const SizedBox(height: 8),
-        _Dots(
-          itemCount: 3,
-          selectedDotIndex: topRatedMoviesBloc.selectedMovieIndex,
-        ),
-      ],
+    if (topRatedMoviesBloc.isError) {
+      return FullScreenError(
+        errorMessage: topRatedMoviesBloc.errorTitle!,
+        errorDescription: topRatedMoviesBloc.errorDescription!,
+      );
+    }
+
+    if (topRatedMoviesBloc.isLoading) return const FullScreenLoader();
+
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _MoviesCarousel(
+            movies: topRatedMoviesBloc.carouselMovies,
+            currentPage: topRatedMoviesBloc.selectedMovieIndex,
+          ),
+          const SizedBox(height: 8),
+          _Dots(
+            itemCount: topRatedMoviesBloc.carouselMovies.length,
+            selectedDotIndex: topRatedMoviesBloc.selectedMovieIndex,
+          ),
+          _MoreMoviesSection(movies: topRatedMoviesBloc.movies),
+        ],
+      ),
+    );
+  }
+}
+
+class _MoreMoviesSection extends StatelessWidget {
+  final List<Movie> movies;
+
+  const _MoreMoviesSection({required this.movies});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(36.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Top 20 Mejor Calificadas',
+            style: context.textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 16),
+          MovieMasonry(
+            shrinkWrap: true,
+            scrollPhysics: const NeverScrollableScrollPhysics(),
+            movies: movies,
+            onClickMovie: (Movie movie) => context.push('${AppRoutes.movies}/${movie.id}'),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -75,7 +122,10 @@ class _MoviesCarousel extends StatefulWidget {
   final List<Movie> movies;
   final int currentPage;
 
-  const _MoviesCarousel({required this.movies, required this.currentPage});
+  const _MoviesCarousel({
+    required this.movies,
+    required this.currentPage,
+  });
 
   @override
   State<_MoviesCarousel> createState() => _MoviesCarouselState();
@@ -134,6 +184,66 @@ class _MovieImageWithGradient extends StatelessWidget {
       children: [
         _MovieImage(movie: movie),
         const _BackgroundGradients(),
+        _MovieInfo(
+          movie: movie,
+        )
+      ],
+    );
+  }
+}
+
+class _MovieInfo extends StatelessWidget {
+  final Movie movie;
+
+  const _MovieInfo({required this.movie});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 36.0, vertical: 24.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Text(
+            movie.title,
+            style: context.textTheme.displaySmall!.copyWith(
+              fontWeight: FontWeight.bold,
+              color: AppColors.white50,
+            ),
+          ),
+          const SizedBox(height: 4),
+          _MovieAverage(average: movie.voteAverage),
+        ],
+      ),
+    );
+  }
+}
+
+class _MovieAverage extends StatelessWidget {
+  final double average;
+
+  const _MovieAverage({required this.average});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        const Icon(
+          Icons.star,
+          color: Colors.amber,
+          size: 25,
+        ),
+        const SizedBox(
+          width: 8,
+        ),
+        Text(
+          '${average.toStringAsFixed(1)}/10',
+          style: context.textTheme.titleMedium!.copyWith(
+            color: AppColors.white100,
+          ),
+        ),
       ],
     );
   }
@@ -149,35 +259,16 @@ class _BackgroundGradients extends StatelessWidget {
         Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
               colors: [
                 Colors.black,
-                Colors.black45,
                 Colors.transparent,
-                Colors.black45,
-                Colors.black,
               ],
-              stops: [0.0, 0.05, 0.35, 0.95, 1],
+              stops: [0.0, 1],
             ),
           ),
         ),
-
-        Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [
-                Colors.black,
-                Colors.transparent,
-                Colors.transparent,
-                Colors.black,
-              ],
-              stops: [0.05, 0.25,0.85, 0.95],
-            ),
-          ),
-        )
       ],
     );
   }
@@ -191,14 +282,13 @@ class _MovieImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(8.0),
       child: Image.network(
         movie.posterPath,
-        fit: BoxFit.fitHeight,
+        fit: BoxFit.fitWidth,
         errorBuilder: (context, error, stackTrace) {
           return Image.network(
             fit: BoxFit.cover,
-            'https://linnea.com.ar/wp-content/uploads/2018/09/404PosterNotFound.jpg',
+            NetworkImagesUrls.noPosterMovieUrl,
           );
         },
         loadingBuilder: (context, child, loadingProgress) {

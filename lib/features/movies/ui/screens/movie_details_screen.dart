@@ -9,6 +9,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../config/routes/routes.dart';
 import '../../../../config/theme/app_colors.dart';
+import '../../../../core/ui/utils/img_paths.dart';
+import '../../../../core/ui/utils/ui_strings.dart';
 import '../../../../core/ui/widgets/fade_in_animation.dart';
 import '../../../../core/ui/widgets/full_screen_error.dart';
 import '../../../../core/ui/widgets/full_screen_loader.dart';
@@ -188,7 +190,7 @@ class _MovieInfo extends StatelessWidget {
             ),
           ),
           Text(
-            '${(movie.voteAverage * 10).toStringAsFixed(0)}% User Score',
+            UIStrings.replaceUIString(UIStrings.userScoreLabel, (movie.voteAverage * 10).toStringAsFixed(0)),
             style: context.textTheme.titleMedium!.copyWith(color: AppColors.white200),
           ),
         ],
@@ -251,7 +253,7 @@ class _FullScreenImage extends StatelessWidget {
       errorBuilder: (context, error, stackTrace) {
         return Image.network(
           fit: BoxFit.cover,
-          'https://linnea.com.ar/wp-content/uploads/2018/09/404PosterNotFound.jpg',
+          NetworkImagesUrls.noPosterMovieUrl,
         );
       },
       loadingBuilder: (context, child, loadingProgress) {

@@ -10,4 +10,6 @@ abstract class MovieDatasource {
 
   Future<Result<List<Movie>, DataError>> getMoviesByActorId(int id);
 
+  Future<Result<List<Movie>, DataError>> getTopRatedMovies(int page);
+
 }

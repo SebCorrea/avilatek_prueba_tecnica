@@ -2,6 +2,7 @@ import 'package:avilatek_prueba_tecnica/config/theme/ui_extension.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../config/theme/app_colors.dart';
+import '../../../../core/ui/utils/img_paths.dart';
 import '../../../../core/ui/widgets/fade_in_animation.dart';
 import '../../domain/entities/actor.dart';
 
@@ -49,7 +50,7 @@ class _ActorImage extends StatelessWidget {
       errorBuilder: (context, error, stackTrace) {
         return Image.network(
           fit: BoxFit.cover,
-          'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+          NetworkImagesUrls.noUserImageUrl,
         );
       },
       loadingBuilder: (context, child, loadingProgress) {
