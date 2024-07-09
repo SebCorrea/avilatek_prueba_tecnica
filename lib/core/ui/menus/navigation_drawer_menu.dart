@@ -53,8 +53,9 @@ class _Options extends StatelessWidget {
         final menuItem = menuItems[index];
         return _MenuItem(
           navigationShell: navigationShell,
-          index: index,
+          showDivider: index == menuItems.length - 1,
           menuItem: menuItem,
+          index: index,
         );
       },
     );
@@ -64,12 +65,14 @@ class _Options extends StatelessWidget {
 class _MenuItem extends StatelessWidget {
   final MenuItem menuItem;
   final StatefulNavigationShell navigationShell;
+  final bool showDivider;
   final int index;
 
   const _MenuItem({
     required this.navigationShell,
-    required this.index,
+    required this.showDivider,
     required this.menuItem,
+    required this.index,
   });
 
   @override
@@ -77,7 +80,7 @@ class _MenuItem extends StatelessWidget {
     final isSelectedItem = navigationShell.currentIndex == index;
     return Column(
       children: [
-        if (index == 2)
+        if (showDivider)
           Divider(
             thickness: 1,
             color: context.colorScheme.outline,
@@ -107,7 +110,6 @@ class _MenuItem extends StatelessWidget {
     );
   }
 }
-
 
 class _NavigationDrawerHeader extends StatelessWidget {
   const _NavigationDrawerHeader();
@@ -139,10 +141,12 @@ class _UserItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const _UserImage(),
+        const SafeArea(
+          bottom: false,
+          child: _UserImage(),
+        ),
         const SizedBox(
           height: 16,
         ),

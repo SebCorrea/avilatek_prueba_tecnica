@@ -7,4 +7,5 @@ class AppRoutes {
   static const actor = '/actor';
   static const topRated = '/top-rated';
 
+
 }

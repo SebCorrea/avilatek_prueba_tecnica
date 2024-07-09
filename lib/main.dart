@@ -1,3 +1,4 @@
+
 import 'package:avilatek_prueba_tecnica/config/routes/router.dart';
 import 'package:avilatek_prueba_tecnica/core/services/dot_env/dot_env_service.dart';
 import 'package:avilatek_prueba_tecnica/features/configuration/ui/blocs/theme_bloc/theme_bloc.dart';
@@ -32,3 +33,4 @@ class MainApp extends StatelessWidget {
     );
   }
 }
+
