@@ -4,12 +4,15 @@ class SearchMovieState extends Equatable {
   final List<Movie> movies;
   final bool isLoading;
   final bool isError;
+  final bool isEmptyResults;
+
   final String? errorTitle;
   final String? errorDescription;
 
   const SearchMovieState({
     this.movies = const [],
     this.isLoading = false,
+    this.isEmptyResults = false,
     this.isError = false,
     this.errorTitle,
     this.errorDescription,
@@ -18,6 +21,7 @@ class SearchMovieState extends Equatable {
   SearchMovieState _copyWith({
     List<Movie>? movies,
     bool? isLoading,
+    bool? isEmptyResults,
     bool? isError,
     String? errorTitle,
     String? errorDescription,
@@ -25,6 +29,7 @@ class SearchMovieState extends Equatable {
       SearchMovieState(
         movies: movies ?? this.movies,
         isLoading: isLoading ?? this.isLoading,
+        isEmptyResults: isEmptyResults ?? this.isEmptyResults,
         isError: isError ?? this.isError,
         errorDescription: errorDescription ?? this.errorDescription,
         errorTitle: errorTitle ?? this.errorTitle,
@@ -35,6 +40,7 @@ class SearchMovieState extends Equatable {
         movies,
         isLoading,
         isError,
+        isEmptyResults,
         errorTitle,
         errorDescription,
       ];

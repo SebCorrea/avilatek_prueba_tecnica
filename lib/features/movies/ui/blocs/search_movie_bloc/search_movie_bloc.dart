@@ -38,10 +38,7 @@ class SearchMovieBloc extends Bloc<SearchMovieEvent, SearchMovieState> {
   Future<void> _onSearchMovies(SearchMovies event, Emitter<SearchMovieState> emit) async {
     if (event.query.isEmpty) {
       emit(
-        state._copyWith(
-          movies: [],
-          isLoading: false
-        ),
+        state._copyWith(movies: [], isLoading: false),
       );
       return;
     }
@@ -55,6 +52,7 @@ class SearchMovieBloc extends Bloc<SearchMovieEvent, SearchMovieState> {
           errorTitle: null,
           errorDescription: null,
           isError: false,
+          isEmptyResults: response.data!.isEmpty,
           movies: response.data,
         ),
       );

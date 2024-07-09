@@ -79,9 +79,10 @@ class _Results extends StatelessWidget {
     if (searchMovieBlocState.movies.isEmpty) {
       return Padding(
         padding: const EdgeInsets.all(36.0),
-        child: MovieMasonry(
+        child: _EmptyResults(
           movies: popularMoviesBlocState.movies,
           onClickMovie: (Movie movie) => context.push('${AppRoutes.movies}/${movie.id}'),
+          isEmptyResults: searchMovieBlocState.isEmptyResults,
         ),
       );
     }
@@ -95,15 +96,67 @@ class _Results extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.all(36.0),
-      child: _SearchedMovies(movies: searchMovieBlocState.movies),
+      child: _SearchedMovies(
+        movies: searchMovieBlocState.movies,
+        onClickMovie: (Movie movie) => context.push('${AppRoutes.movies}/${movie.id}'),
+      ),
+    );
+  }
+}
+
+class _EmptyResults extends StatelessWidget {
+  final List<Movie> movies;
+  final bool isEmptyResults;
+  final void Function(Movie movie) onClickMovie;
+
+  const _EmptyResults({required this.movies, required this.isEmptyResults, required this.onClickMovie});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: [
+        if (isEmptyResults) const _EmptyResultsMessage(),
+        MovieMasonry(
+          shrinkWrap: true,
+          scrollPhysics: const NeverScrollableScrollPhysics(),
+          movies: movies,
+          onClickMovie: onClickMovie,
+        ),
+      ],
+    );
+  }
+}
+
+class _EmptyResultsMessage extends StatelessWidget {
+  const _EmptyResultsMessage();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+         Text(
+          UIStrings.emptyResultsMessage,
+        style: context.textTheme.bodyMedium,
+        ),
+        const SizedBox(height: 8),
+        Divider(
+          thickness: 1,
+          color: context.colorScheme.outline,
+        ),
+        const SizedBox(height: 16)
+      ],
     );
   }
 }
 
 class _SearchedMovies extends StatelessWidget {
   final List<Movie> movies;
+  final void Function(Movie movie) onClickMovie;
 
-  const _SearchedMovies({required this.movies});
+  const _SearchedMovies({
+    required this.movies,
+    required this.onClickMovie,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -113,6 +166,7 @@ class _SearchedMovies extends StatelessWidget {
         final movie = movies[index];
         return _SearchedMovieItem(
           movie: movie,
+          onClickMovie: onClickMovie,
         );
       },
       separatorBuilder: (BuildContext context, int index) {
@@ -127,14 +181,15 @@ class _SearchedMovies extends StatelessWidget {
 
 class _SearchedMovieItem extends StatelessWidget {
   final Movie movie;
+  final void Function(Movie movie) onClickMovie;
 
-  const _SearchedMovieItem({required this.movie});
+  const _SearchedMovieItem({required this.movie, required this.onClickMovie});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onTap: () => context.push('${AppRoutes.movies}/${movie.id}'),
+      onTap: () => onClickMovie(movie),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
