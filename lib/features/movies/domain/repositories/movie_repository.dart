@@ -12,4 +12,6 @@ abstract class MovieRepository {
 
   Future<Result<List<Movie>, DataError>> getTopRatedMovies(int page);
 
+  Future<Result<List<Movie>, DataError>> searchMovie(String query);
+
 }

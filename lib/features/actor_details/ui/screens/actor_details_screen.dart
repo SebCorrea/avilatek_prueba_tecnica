@@ -14,7 +14,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../config/routes/routes.dart';
 import '../../../../core/ui/utils/img_paths.dart';
-import '../../../../core/ui/widgets/fade_in_animation.dart';
+import '../../../../core/ui/widgets/custom_network_image.dart';
 import '../../../movies/domain/entities/movie.dart';
 import '../../../../core/ui/widgets/movie_masonry.dart';
 import '../blocs/actor_details_bloc/actor_details_bloc.dart';
@@ -164,19 +164,9 @@ class _ActorImage extends StatelessWidget {
       height: 80,
       decoration: BoxDecoration(color: context.colorScheme.surface, shape: BoxShape.circle),
       child: ClipOval(
-        child: Image.network(
-          imageUrl,
-          fit: BoxFit.cover,
-          errorBuilder: (context, error, stackTrace) {
-            return Image.network(
-              fit: BoxFit.cover,
-              NetworkImagesUrls.noUserImageUrl,
-            );
-          },
-          loadingBuilder: (context, child, loadingProgress) {
-            if (loadingProgress == null) return FadeInAnimation(child: child);
-            return child;
-          },
+        child: CustomNetworkImage(
+          imageUrl: imageUrl,
+          onErrorImageUrl: NetworkImagesUrls.noUserImageUrl,
         ),
       ),
     );

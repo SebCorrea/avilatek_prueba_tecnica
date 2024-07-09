@@ -29,6 +29,7 @@ class AppColors {
 
 
   /*Outlined*/
+  static const Color gray400 = Color(0xffa1a1a1);
   static const Color white200 = Color(0xffd7d7d7);
   static const Color black700 = Color(0xff2c2c2c);
 

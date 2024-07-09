@@ -15,6 +15,8 @@ import 'package:avilatek_prueba_tecnica/features/movies/domain/repositories/movi
 import 'package:avilatek_prueba_tecnica/features/movies/domain/usecases/get_movie_by_id_usecase.dart';
 import 'package:avilatek_prueba_tecnica/features/movies/domain/usecases/get_popular_movies_usecase.dart';
 import 'package:avilatek_prueba_tecnica/features/movies/domain/usecases/get_top_rated_movies.dart';
+import 'package:avilatek_prueba_tecnica/features/movies/domain/usecases/search_movie_usecase.dart';
+import 'package:avilatek_prueba_tecnica/features/movies/ui/blocs/search_movie_bloc/search_movie_bloc.dart';
 import 'package:avilatek_prueba_tecnica/features/movies/ui/blocs/top_rated_movies_bloc/top_rated_movies_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -95,6 +97,9 @@ class MoviesInjectionService extends InjectionService {
     getIt.registerSingleton<GetTopRatedMoviesUseCase>(GetTopRatedMoviesUseCase(movieRepository: getIt()));
     getIt.registerFactory<TopRatedMoviesBloc>(() => TopRatedMoviesBloc(getTopRatedMoviesUseCase: getIt()));
 
+    /*Search Movie*/
+    getIt.registerSingleton<SearchMovieUseCase>(SearchMovieUseCase(movieRepository: getIt()));
+    getIt.registerFactory<SearchMovieBloc>(() => SearchMovieBloc(searchMovieUseCase: getIt()));
   }
 }
 

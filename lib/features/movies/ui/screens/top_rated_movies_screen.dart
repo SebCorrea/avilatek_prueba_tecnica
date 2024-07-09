@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:avilatek_prueba_tecnica/config/theme/app_colors.dart';
 import 'package:avilatek_prueba_tecnica/config/theme/ui_extension.dart';
+import 'package:avilatek_prueba_tecnica/core/ui/widgets/custom_network_image.dart';
 import 'package:avilatek_prueba_tecnica/features/movies/ui/blocs/top_rated_movies_bloc/top_rated_movies_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -182,7 +183,10 @@ class _MovieImageWithGradient extends StatelessWidget {
       alignment: Alignment.center,
       fit: StackFit.expand,
       children: [
-        _MovieImage(movie: movie),
+        CustomNetworkImage(
+          imageUrl: movie.posterPath,
+          onErrorImageUrl: NetworkImagesUrls.noPosterMovieUrl,
+        ),
         const _BackgroundGradients(),
         _MovieInfo(
           movie: movie,
@@ -232,7 +236,7 @@ class _MovieAverage extends StatelessWidget {
       children: [
         const Icon(
           Icons.star,
-          color: Colors.amber,
+          color: Colors.amberAccent,
           size: 25,
         ),
         const SizedBox(
@@ -270,34 +274,6 @@ class _BackgroundGradients extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class _MovieImage extends StatelessWidget {
-  final Movie movie;
-
-  const _MovieImage({required this.movie});
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      child: Image.network(
-        movie.posterPath,
-        fit: BoxFit.fitWidth,
-        errorBuilder: (context, error, stackTrace) {
-          return Image.network(
-            fit: BoxFit.cover,
-            NetworkImagesUrls.noPosterMovieUrl,
-          );
-        },
-        loadingBuilder: (context, child, loadingProgress) {
-          if (loadingProgress != null) {
-            return const SizedBox();
-          }
-          return FadeInAnimation(child: child);
-        },
-      ),
     );
   }
 }

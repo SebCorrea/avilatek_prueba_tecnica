@@ -1,9 +1,9 @@
 import 'package:avilatek_prueba_tecnica/config/theme/ui_extension.dart';
+import 'package:avilatek_prueba_tecnica/core/ui/widgets/custom_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../config/theme/app_colors.dart';
 import '../../../../core/ui/utils/img_paths.dart';
-import '../../../../core/ui/widgets/fade_in_animation.dart';
 import '../../domain/entities/actor.dart';
 
 class ActorItem extends StatelessWidget {
@@ -25,7 +25,10 @@ class ActorItem extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            _ActorImage(actor: actor),
+            CustomNetworkImage(
+              imageUrl: actor.profilePath,
+              onErrorImageUrl: NetworkImagesUrls.noUserImageUrl,
+            ),
             const _BackgroundGradient(),
             _ActorInfo(
               actor: actor,
@@ -33,32 +36,6 @@ class ActorItem extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _ActorImage extends StatelessWidget {
-  final Actor actor;
-
-  const _ActorImage({required this.actor});
-
-  @override
-  Widget build(BuildContext context) {
-    return Image.network(
-      actor.profilePath,
-      fit: BoxFit.cover,
-      errorBuilder: (context, error, stackTrace) {
-        return Image.network(
-          fit: BoxFit.cover,
-          NetworkImagesUrls.noUserImageUrl,
-        );
-      },
-      loadingBuilder: (context, child, loadingProgress) {
-        if (loadingProgress != null) {
-          return const SizedBox();
-        }
-        return FadeInAnimation(child: child);
-      },
     );
   }
 }

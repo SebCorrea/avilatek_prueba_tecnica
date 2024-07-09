@@ -2,6 +2,11 @@ class UIStrings {
   UIStrings._();
 
   static replaceUIString(String message, String value) => message.replaceAll('%d', value);
+  /*General*/
+  static const String cancelLabel = 'Cancelar';
+  static const String searchLabel = 'Buscar';
+
+
 
   /*User*/
   static const String name = 'Sebastián Correa';

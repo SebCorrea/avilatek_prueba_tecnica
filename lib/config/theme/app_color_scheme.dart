@@ -22,6 +22,7 @@ class AppColorScheme {
         surface: AppColors.white50,
         onSurface: AppColors.black800,
         outline: AppColors.white200,
+        outlineVariant: AppColors.gray400,
       );
 
   static ColorScheme dark() => const ColorScheme(
@@ -43,5 +44,6 @@ class AppColorScheme {
         surface: AppColors.black800,
         onSurface: AppColors.white50,
         outline: AppColors.black700,
+        outlineVariant: AppColors.gray400,
       );
 }

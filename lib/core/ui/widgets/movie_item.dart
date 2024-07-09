@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import '../../../config/theme/app_colors.dart';
 import '../utils/img_paths.dart';
 import '../utils/ui_strings.dart';
-import 'fade_in_animation.dart';
 import '../../../features/movies/domain/entities/movie.dart';
+import 'custom_network_image.dart';
 
 class MovieItem extends StatelessWidget {
   final Movie movie;
@@ -23,43 +23,23 @@ class MovieItem extends StatelessWidget {
       onTap: () => onClickMovie(movie),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            MovieImage(movie: movie),
-            const _BackgroundGradient(),
-            _MovieInfo(
-              movie: movie,
-            ),
-          ],
+        child: Container(
+          color: context.colorScheme.surface,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              CustomNetworkImage(
+                imageUrl: movie.posterPath,
+                onErrorImageUrl: NetworkImagesUrls.noPosterMovieUrl,
+              ),
+              const _BackgroundGradient(),
+              _MovieInfo(
+                movie: movie,
+              ),
+            ],
+          ),
         ),
       ),
-    );
-  }
-}
-
-class MovieImage extends StatelessWidget {
-  final Movie movie;
-
-  const MovieImage({super.key, required this.movie});
-
-  @override
-  Widget build(BuildContext context) {
-    return Image.network(
-      movie.posterPath,
-      fit: BoxFit.cover,
-      errorBuilder: (context, error, stackTrace) {
-        return Image.network(
-          fit: BoxFit.cover,
-          NetworkImagesUrls.noPosterMovieUrl,
-        );
-      },
-      loadingBuilder: (context, child, loadingProgress) {
-        if (loadingProgress != null) {
-          return const SizedBox();
-        }
-        return FadeInAnimation(child: child);
-      },
     );
   }
 }

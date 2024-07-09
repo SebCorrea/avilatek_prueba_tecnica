@@ -8,6 +8,7 @@ class CircularGradientIconButton extends StatelessWidget {
   final VoidCallback onClick;
   final List<Color> backgroundColors;
   final double size;
+  final Color? iconColor;
 
   const CircularGradientIconButton({
     super.key,
@@ -15,6 +16,7 @@ class CircularGradientIconButton extends StatelessWidget {
     required this.onClick,
     this.backgroundColors = const [AppColors.violet500, AppColors.indigo500],
     this.size = 40,
+    this.iconColor,
   });
 
   @override
@@ -35,7 +37,7 @@ class CircularGradientIconButton extends StatelessWidget {
         icon: Icon(
           iconData,
           size: size / 2,
-          color: context.colorScheme.background,
+          color: iconColor ?? context.colorScheme.onSurface,
         ),
       ),
     );

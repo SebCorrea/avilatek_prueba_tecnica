@@ -1,6 +1,7 @@
 import 'package:avilatek_prueba_tecnica/config/theme/ui_extension.dart';
 import 'package:avilatek_prueba_tecnica/core/services/get_it/injection_service.dart';
 import 'package:avilatek_prueba_tecnica/core/ui/widgets/circular_gradient_icon_button.dart';
+import 'package:avilatek_prueba_tecnica/core/ui/widgets/custom_network_image.dart';
 import 'package:avilatek_prueba_tecnica/features/actors/ui/blocs/actors_bloc/actors_bloc.dart';
 import 'package:avilatek_prueba_tecnica/features/actors/ui/widgets/actor_item.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,6 @@ import '../../../../config/routes/routes.dart';
 import '../../../../config/theme/app_colors.dart';
 import '../../../../core/ui/utils/img_paths.dart';
 import '../../../../core/ui/utils/ui_strings.dart';
-import '../../../../core/ui/widgets/fade_in_animation.dart';
 import '../../../../core/ui/widgets/full_screen_error.dart';
 import '../../../../core/ui/widgets/full_screen_loader.dart';
 import '../../../actors/domain/entities/actor.dart';
@@ -62,7 +62,11 @@ class _MovieDetailsView extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          _FullScreenImage(movie: getMovieBlocState.movie!),
+          CustomNetworkImage(
+            imageUrl: getMovieBlocState.movie!.posterPath,
+            onErrorImageUrl: NetworkImagesUrls.noPosterMovieUrl,
+
+          ),
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -88,7 +92,6 @@ class _MovieDetailsView extends StatelessWidget {
               ),
             ),
           ),
-
           Positioned(
             top: 36,
             left: 24,
@@ -234,34 +237,6 @@ class ActorsHorizontalListView extends StatelessWidget {
           },
         ),
       ),
-    );
-  }
-}
-
-
-
-class _FullScreenImage extends StatelessWidget {
-  final Movie movie;
-
-  const _FullScreenImage({required this.movie});
-
-  @override
-  Widget build(BuildContext context) {
-    return Image.network(
-      movie.posterPath,
-      fit: BoxFit.cover,
-      errorBuilder: (context, error, stackTrace) {
-        return Image.network(
-          fit: BoxFit.cover,
-          NetworkImagesUrls.noPosterMovieUrl,
-        );
-      },
-      loadingBuilder: (context, child, loadingProgress) {
-        if (loadingProgress != null) {
-          return const SizedBox();
-        }
-        return FadeInAnimation(child: child);
-      },
     );
   }
 }

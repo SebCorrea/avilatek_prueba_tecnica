@@ -1,4 +1,3 @@
-import 'package:avilatek_prueba_tecnica/config/theme/ui_extension.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -62,7 +61,6 @@ class _MovieMasonryState extends State<MovieMasonry> {
         return Container(
           margin: EdgeInsets.only(top: index == 1 ? 24.0 : 0.0),
           height: 250,
-          color: context.colorScheme.surface,
           child: MovieItem(
             movie: movie,
             onClickMovie: widget.onClickMovie,
