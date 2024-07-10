@@ -22,18 +22,21 @@ class ActorItem extends StatelessWidget {
       onTap: () => onClickActor(actor),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            CustomNetworkImage(
-              imageUrl: actor.profilePath,
-              onErrorImageUrl: NetworkImagesUrls.noUserImageUrl,
-            ),
-            const _BackgroundGradient(),
-            _ActorInfo(
-              actor: actor,
-            ),
-          ],
+        child: Container(
+          color: context.colorScheme.surface,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              CustomNetworkImage(
+                imageUrl: actor.profilePath,
+                onErrorImageUrl: NetworkImagesUrls.noUserImageUrl,
+              ),
+              const _BackgroundGradient(),
+              _ActorInfo(
+                actor: actor,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -75,7 +78,7 @@ class _ActorInfo extends StatelessWidget {
             actor.name,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: context.textTheme.titleMedium!.copyWith(color: AppColors.white50),
+            style: context.textTheme.titleSmall!.copyWith(color: AppColors.white50),
           ),
           Text(
             actor.character,

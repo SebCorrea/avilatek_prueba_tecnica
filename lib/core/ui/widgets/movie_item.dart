@@ -85,7 +85,7 @@ class _MovieInfo extends StatelessWidget {
             movie.title,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style: context.textTheme.titleMedium!.copyWith(color: AppColors.white50),
+            style: context.textTheme.titleSmall!.copyWith(color: AppColors.white50),
           ),
           Text(
             UIStrings.replaceUIString(UIStrings.userScoreLabel, (movie.voteAverage * 10).toStringAsFixed(0)),

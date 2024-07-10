@@ -41,15 +41,15 @@ class ActorDetailsScreen extends StatelessWidget {
             BlocProvider(create: (_) => getIt<ActorDetailsBloc>()..add(GetActorDetails(actorId))),
             BlocProvider(create: (_) => getIt<MoviesActorBloc>()..add(GetMoviesByActorId(actorId))),
           ],
-          child: const _ActorDetailsView(),
+          child: const ActorDetailsView(),
         ),
       ),
     );
   }
 }
 
-class _ActorDetailsView extends StatelessWidget {
-  const _ActorDetailsView();
+class ActorDetailsView extends StatelessWidget {
+  const ActorDetailsView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +59,10 @@ class _ActorDetailsView extends StatelessWidget {
     if (isActorDetailsLoading && isMoviesLoading) return const FullScreenLoader();
 
     return const SingleChildScrollView(
+
       physics: BouncingScrollPhysics(),
       child: Column(
+        key: Key('actor_info'),
         children: [
           SizedBox(height: 16),
           _ActorDetails(),

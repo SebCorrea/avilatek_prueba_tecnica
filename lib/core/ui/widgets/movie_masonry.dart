@@ -69,7 +69,7 @@ class _MovieMasonryState extends State<MovieMasonry> {
         final movie = widget.movies[index];
         return Container(
           margin: EdgeInsets.only(top: index == 1 ? 24.0 : 0.0),
-          height: 250,
+          height: 200,
           child: MovieItem(
             movie: movie,
             onClickMovie: widget.onClickMovie,

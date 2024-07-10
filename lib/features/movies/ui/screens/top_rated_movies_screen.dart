@@ -36,7 +36,7 @@ class TopRatedMoviesScreen extends StatelessWidget {
         title: UIStrings.topRated,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 36.0),
+        padding: const EdgeInsets.only(top: 36.0),
         child: MultiBlocProvider(
           providers: [
             BlocProvider(

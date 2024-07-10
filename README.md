@@ -4,10 +4,14 @@ Proyecto realizado como parte del proceso de selección de Avila Tek
 
 <h2 >📚 Acerca del Proyecto</h2>
 
-Este proyecto consiste en una aplicación móvil desarrollada con Flutter que consume la API de The Movie Database (TMDB) para mostrar información sobre películas y actores. La aplicación se estructura utilizando el patrón BLoC (Business Logic Component) para la gestión de estado, Dio para el manejo de peticiones HTTP y GetIt para la inyección de dependencias, asegurando una arquitectura limpia, escalable y fácil de mantener.
+Este proyecto consiste en una aplicación móvil desarrollada con Flutter que consume la API de The
+Movie Database (TMDB) para mostrar información sobre películas y actores. La aplicación se
+estructura utilizando el patrón BLoC (Business Logic Component) para la gestión de estado, Dio para
+el manejo de peticiones HTTP y GetIt para la inyección de dependencias, asegurando una arquitectura
+limpia, escalable y fácil de mantener.
 
-Todas las animaciones presentes en la aplicación han sido desarrolladas de forma personalizada, ofreciendo una experiencia de usuario fluida y visualmente atractiva.
-
+Todas las animaciones presentes en la aplicación han sido desarrolladas de forma personalizada,
+ofreciendo una experiencia de usuario fluida y visualmente atractiva.
 
 <h3>Features Principales</h3>
 <p align="center">
@@ -30,23 +34,53 @@ Todas las animaciones presentes en la aplicación han sido desarrolladas de form
 <h2 >⚙️ Instalación del Proyecto</h2>
 
 1. Clonar el repositorio
+
 ```
 https://github.com/SebCorrea/avilatek_prueba_tecnica.git
 ```
 
 2. Acceder al directorio del proyecto
+
 ```
 cd avilatek_prueba_tecnica
 ```
 
 3. Ejecutar el comando para descargar y resolver las dependencias del proyecto
+
 ```
 flutter pub get
 ```
 
-4. Renombrar el archivo ```.env.template``` a ```.env``` y llenar las variables de entorno respectivas
+4. Renombrar el archivo ```.env.template``` a ```.env``` y llenar las variables de entorno
+   respectivas
 
-<h2>📦Dependencias</h2>
+<h2>🧪 Testing</h2>
+
+1. Asegúrate de tener instaladas todas las dependencias de desarrollo listadas en el archivo
+   pubspec.yaml. Para hacerlo, ejecuta el siguiente comando en la raíz del proyecto:
+
+```
+flutter pub get
+```
+
+2. Puedes ejecutar todas las pruebas del proyecto con el siguiente comando:
+
+```
+flutter test
+```
+
+Esto ejecutará todas las pruebas en la carpeta test y mostrará los resultados en la consola.
+
+
+3. Para ejecutar una prueba específica, puedes especificar el archivo de prueba o el nombre de la prueba en el comando. Por ejemplo:
+
+```
+flutter test test/features/actor_details/data/datasources/actor_details_datasource_test.dart
+```
+Esto ejecutará todas las pruebas del archivo actor_details_datasource_test.dart
+
+
+<h2>📦 Dependencias</h2>
 
 - [dio: ^5.5.0+1](https://pub.dev/packages/dio)
 - [equatable: ^2.0.5](https://pub.dev/packages/equatable)
@@ -56,8 +90,14 @@ flutter pub get
 - [get_it: ^7.7.0](https://pub.dev/packages/get_it)
 - [go_router: ^14.2.0](https://pub.dev/packages/go_router)
 - [google_fonts: 6.1.0](https://pub.dev/packages/google_fonts)
+- [flutter_launcher_icons: ^0.13.1](https://pub.dev/packages/flutter_launcher_icons)
+- [mockito: ^5.4.4](https://pub.dev/packages/mockito)
+- [http_mock_adapter: ^0.6.1](https://pub.dev/packages/http_mock_adapter)
+- [build_runner: 2.4.6](https://pub.dev/packages/build_runner)
+- [bloc_test: ^9.1.7](https://pub.dev/packages/bloc_test)
 
 
 
 ## Autor
+
 - [Sebastián Correa](https://github.com/SebCorrea)

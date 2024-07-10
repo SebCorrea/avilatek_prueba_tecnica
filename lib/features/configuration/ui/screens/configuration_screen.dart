@@ -192,7 +192,7 @@ class _AnimatedIconState extends State<AnimatedIcon> with SingleTickerProviderSt
     if (widget.isSelected) _controller.forward();
 
     return AnimatedBuilder(
-      animation: _rotateAnim,
+      animation: _controller,
       builder: (context, child) {
         return Transform.rotate(
           angle: _rotateAnim.value,

@@ -64,7 +64,7 @@ class _Results extends StatelessWidget {
 
     if (searchMovieBlocState.movies.isEmpty) {
       return Padding(
-        padding: const EdgeInsets.all(36.0),
+        padding: const EdgeInsets.symmetric(horizontal: 36.0).copyWith(top: 16.0),
         child: _EmptyResults(
           movies: popularMoviesBlocState.movies,
           onClickMovie: (Movie movie) => context.push('${AppRoutes.movies}/${movie.id}'),

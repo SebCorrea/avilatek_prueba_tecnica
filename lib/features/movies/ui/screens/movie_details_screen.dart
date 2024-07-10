@@ -228,9 +228,8 @@ class ActorsHorizontalListView extends StatelessWidget {
         itemBuilder: (context, index) {
           final actor = actors[index];
           return Container(
-            width: 130,
-            color: context.colorScheme.surface,
-            margin: const EdgeInsets.symmetric(horizontal: 4.0),
+            width: 100,
+            margin: const EdgeInsets.symmetric(horizontal: 10.0),
             child: ActorItem(
               actor: actor,
               onClickActor: onClickActor,

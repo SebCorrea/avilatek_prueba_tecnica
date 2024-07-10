@@ -37,7 +37,8 @@ class HomeScreen extends StatelessWidget {
               ],
               iconData: Icons.search,
               onClick: () => context.push(AppRoutes.search)
-            )
+            ),
+            const SizedBox(width: 8.0)
           ],
         ),
         body: const Padding(
