@@ -19,10 +19,12 @@ Todas las animaciones presentes en la aplicación han sido desarrolladas de form
 
 <h3>Features Extras</h3>
 <p align="center">
-  <img width="200" alt="Screenshot 2024-07-10 at 1 38 45 AM" src="https://github.com/SebCorrea/avilatek_prueba_tecnica/assets/100172158/84440171-103e-491a-abd2-32e18dfa98e8">
+<img width="200" alt="Screenshot 2024-07-10 at 2 25 12 AM" src="https://github.com/SebCorrea/avilatek_prueba_tecnica/assets/100172158/2c653420-b773-4b8d-8cbf-8d34cf0f6de1">  
+<img width="200" alt="Screenshot 2024-07-10 at 1 38 45 AM" src="https://github.com/SebCorrea/avilatek_prueba_tecnica/assets/100172158/84440171-103e-491a-abd2-32e18dfa98e8">
 <img width="200" alt="Screenshot 2024-07-10 at 1 39 30 AM" src="https://github.com/SebCorrea/avilatek_prueba_tecnica/assets/100172158/76bc4883-2d7b-41c2-8950-ce3edd605121">
 <img width="200" alt="Screenshot 2024-07-10 at 1 39 44 AM" src="https://github.com/SebCorrea/avilatek_prueba_tecnica/assets/100172158/489b1512-206f-4551-9277-1d502f101140">
 <img width="200" alt="Screenshot 2024-07-10 at 1 40 11 AM" src="https://github.com/SebCorrea/avilatek_prueba_tecnica/assets/100172158/eb5c0f42-8df4-4a0c-b1db-b8b498c200b2">
+  
 </p>
 
 <h2 >⚙️ Instalación del Proyecto</h2>
