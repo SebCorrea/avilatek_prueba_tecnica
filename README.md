@@ -44,6 +44,19 @@ flutter pub get
 
 4. Renombrar el archivo ```.env.template``` a ```.env``` y llenar las variables de entorno respectivas
 
+<h3>Dependencias</h3>
+
+- [dio: ^5.5.0+1](https://pub.dev/packages/dio)
+- [equatable: ^2.0.5](https://pub.dev/packages/equatable)
+- [flutter_bloc: ^8.1.6](https://pub.dev/packages/flutter_bloc)
+- [flutter_dotenv: ^5.1.0](https://pub.dev/packages/dotenv)
+- [flutter_staggered_grid_view: ^0.7.0](https://pub.dev/packages/flutter_staggered_grid_view)
+- [get_it: ^7.7.0](https://pub.dev/packages/get_it)
+- [go_router: ^14.2.0](https://pub.dev/packages/go_router)
+- [google_fonts: 6.1.0](https://pub.dev/packages/google_fonts)
+
+
 
 ## Autor
 - [Sebastián Correa](https://github.com/SebCorrea)
+
