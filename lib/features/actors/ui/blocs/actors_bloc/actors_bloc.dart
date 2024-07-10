@@ -35,7 +35,7 @@ class ActorsBloc extends Bloc<ActorsEvent, ActorsState> {
           errorTitle: null,
           errorDescription: null,
           isError: false,
-          actors: response.data,
+          actors: response.data!.take(3).toList(),
         ),
       );
     }

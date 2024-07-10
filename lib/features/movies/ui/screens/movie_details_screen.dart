@@ -65,7 +65,6 @@ class _MovieDetailsView extends StatelessWidget {
           CustomNetworkImage(
             imageUrl: getMovieBlocState.movie!.posterPath,
             onErrorImageUrl: NetworkImagesUrls.noPosterMovieUrl,
-
           ),
           Container(
             decoration: const BoxDecoration(
@@ -93,7 +92,7 @@ class _MovieDetailsView extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 36,
+            top: 65,
             left: 24,
             child: CircularGradientIconButton(
               iconData: Icons.close,
@@ -160,10 +159,13 @@ class _MovieInfoSection extends StatelessWidget {
           movie: movie,
           actors: actors,
         ),
-        ActorsHorizontalListView(
-          actors: actors,
-          onClickActor: (Actor actor) => context.push(
-            '${AppRoutes.actor}/${actor.id}',
+        SafeArea(
+          top: false,
+          child: ActorsHorizontalListView(
+            actors: actors,
+            onClickActor: (Actor actor) => context.push(
+              '${AppRoutes.actor}/${actor.id}',
+            ),
           ),
         )
       ],
@@ -214,28 +216,27 @@ class ActorsHorizontalListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 24.0, bottom: 16.0),
-      child: SizedBox(
-        height: 150,
-        child: ListView.builder(
-          physics: const BouncingScrollPhysics(),
-          shrinkWrap: true,
-          scrollDirection: Axis.horizontal,
-          itemCount: actors.length,
-          itemBuilder: (context, index) {
-            final actor = actors[index];
-            return Container(
-              width: 130,
-              color: context.colorScheme.surface,
-              margin: const EdgeInsets.only(right: 10.0),
-              child: ActorItem(
-                actor: actor,
-                onClickActor: onClickActor,
-              ),
-            );
-          },
-        ),
+    return Container(
+      height: 150,
+      margin: const EdgeInsets.only(left: 0.0, bottom: 16.0),
+      alignment: Alignment.center,
+      child: ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: actors.length,
+        itemBuilder: (context, index) {
+          final actor = actors[index];
+          return Container(
+            width: 130,
+            color: context.colorScheme.surface,
+            margin: const EdgeInsets.symmetric(horizontal: 4.0),
+            child: ActorItem(
+              actor: actor,
+              onClickActor: onClickActor,
+            ),
+          );
+        },
       ),
     );
   }
