@@ -31,6 +31,19 @@ import '../../../features/movies/domain/usecases/get_movies_by_actor_id.dart';
 import '../../../features/movies/ui/blocs/movie_details_bloc/movie_details_bloc.dart';
 import '../../../features/movies/ui/blocs/popular_movies_bloc/popular_movies_bloc.dart';
 
+/// Instancia del inyector de dependencias de la aplicación.
+///
+/// Esta instancia se utiliza para inyectar todas las dependencias necesarias
+/// para el funcionamiento de la aplicación.
+///
+/// ## Uso
+///
+/// Debes llamar al método injector.injectAll() para inyectar todas las dependencias del proyecto.
+///
+///     void main() async {
+///       await injector.injectAll();
+///       // ...
+///     }
 final Injector injector = Injector(
   services: [
     CommonServices(),
@@ -40,22 +53,37 @@ final Injector injector = Injector(
   ],
 );
 
+/// Clase que gestiona la inyección de dependencias de la aplicación.
+///
+/// Esta clase recibe una lista de [InjectionService] y proporciona un método
+/// para inyectar todas las dependencias de forma asíncrona.
+
 class Injector {
+  /// Lista de servicios de inyección de dependencias.
   final List<InjectionService> services;
 
+  /// Constructor que recibe la lista de [services].
   Injector({required this.services});
 
+  /// Inyecta todas las dependencias de forma asíncrona.
   Future<void> injectAll() async => await Future.wait(
         services.map((service) => service.inject()),
       );
 }
 
+/// Interfaz abstracta para servicios de inyección de dependencias.
 abstract class InjectionService {
+  /// Método abstracto que define la lógica de inyección de dependencias.
   Future<void> inject();
 }
 
+/// Instancia global de GetIt para la gestión de dependencias.
 final getIt = GetIt.instance;
 
+/// Servicio de inyección de dependencias comunes.
+///
+/// Este servicio registra dependencias comunes como Dio, Firebase, Cloudinary o cualquier otro servicio que sea
+/// instanciado múltiples veces en la aplicacion.
 class CommonServices extends InjectionService {
   @override
   Future<void> inject() async {
@@ -75,6 +103,7 @@ class CommonServices extends InjectionService {
   }
 }
 
+/// Servicio de inyección de dependencias relacionadas con películas.
 class MoviesInjectionService extends InjectionService {
   @override
   Future<void> inject() async {
@@ -103,6 +132,7 @@ class MoviesInjectionService extends InjectionService {
   }
 }
 
+/// Servicio de inyección de dependencias relacionadas con actores.
 class ActorsInjectionService extends InjectionService {
   @override
   Future<void> inject() async {
@@ -115,6 +145,7 @@ class ActorsInjectionService extends InjectionService {
   }
 }
 
+/// Servicio de inyección de dependencias relacionadas con detalles de actores.
 class ActorDetailsInjectionService extends InjectionService {
   @override
   Future<void> inject() async {

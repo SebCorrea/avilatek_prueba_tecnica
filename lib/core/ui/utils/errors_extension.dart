@@ -1,6 +1,7 @@
 import 'package:avilatek_prueba_tecnica/core/domain/errors/data_error.dart';
 import 'package:avilatek_prueba_tecnica/core/ui/utils/ui_strings.dart';
 
+/// Extensión en [DataError] que proporciona mensajes de error descriptivos.
 extension DataErrorMessages on DataError {
   String get errorDescription => switch (this) {
         NetworkError.unknown => UIStrings.unknownErrorDescription,

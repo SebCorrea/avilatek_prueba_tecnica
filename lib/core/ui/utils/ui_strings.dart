@@ -1,3 +1,4 @@
+/// Clase que define las cadenas de texto utilizadas en la interfaz de usuario de la aplicación.
 class UIStrings {
   UIStrings._();
 

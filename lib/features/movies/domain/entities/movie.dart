@@ -1,3 +1,32 @@
+/// Representa una película.
+///
+/// [id] El ID único de la película.
+///
+/// [adult] Indica si la película es para adultos.
+///
+/// [backdropPath] La ruta a la imagen de fondo de la película.
+///
+/// [genreIds] La lista de IDs de géneros a los que pertenece la película.
+///
+/// [originalLanguage] El idioma original de la película.
+///
+/// [originalTitle] El título original de la película.
+///
+/// [overview] Una descripción general de la película.
+///
+/// [popularity] La popularidad de la película.
+///
+/// [posterPath] La ruta a la imagen del póster de la película.
+///
+/// [releaseDate] La fecha de estreno de la película.
+///
+/// [title] El título de la película.
+///
+/// [video] Indica si la película tiene un video disponible.
+///
+/// [voteAverage]La calificación promedio de la película.
+///
+/// [voteCount] El número de votos que ha recibido la película.
 class Movie {
   final int id;
   final bool adult;

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// Un widget que anima la opacidad de su hijo de 0 a 1 durante una duración especificada.
+/// [duration] La duración de la animación. En caso de no especificarse toma un valor de 500 milisegundos
 class FadeInAnimation extends StatelessWidget {
   final Widget child;
   final Duration duration;

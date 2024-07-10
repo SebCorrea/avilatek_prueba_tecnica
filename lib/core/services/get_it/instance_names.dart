@@ -1,3 +1,4 @@
+/// Clase que define los nombres de las instancias de [GetIt] utilizadas en la aplicación.
 class InstanceNames {
   InstanceNames._();
 

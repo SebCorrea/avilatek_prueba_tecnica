@@ -1,6 +1,13 @@
 import 'package:avilatek_prueba_tecnica/features/movies/domain/entities/movie.dart';
 
+/// Clase responsable de mapear datos JSON a objetos [Movie].
 class MovieMapper {
+
+  /// Crea un objeto [Movie] a partir de un mapa JSON.
+  ///
+  /// [json] El mapa JSON que contiene los datos de la película.
+  ///
+  /// Devuelve un objeto [Movie] con los datos mapeados.
   static Movie fromJson(Map<String, dynamic> json) => Movie(
         adult: json["adult"],
         backdropPath: 'https://image.tmdb.org/t/p/w500${json["backdrop_path"]}',

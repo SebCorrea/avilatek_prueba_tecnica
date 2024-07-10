@@ -3,6 +3,17 @@ import 'package:flutter/material.dart';
 
 import '../../../config/theme/app_colors.dart';
 
+/// Un botón circular con un icono y un degradado de fondo.
+///
+/// [iconData] Icono que mostrará el botón
+///
+/// [onClick] Función que se ejecuta al presionar el botón
+///
+/// [backgroundColors] Array de colores para general el degradado Si no se especifica toma [AppColors.indigo500] y [AppColors.violet500],
+///
+/// [size] Tamaño del botón. Si no se especifica toma un tamaño de 40
+///
+/// [iconColor] El color del icono. Si no se especifica, se utilizará el color [onSurface] del tema actual.
 class CircularGradientIconButton extends StatelessWidget {
   final IconData iconData;
   final VoidCallback onClick;
@@ -14,7 +25,7 @@ class CircularGradientIconButton extends StatelessWidget {
     super.key,
     required this.iconData,
     required this.onClick,
-    this.backgroundColors = const [AppColors.violet500, AppColors.indigo500],
+    this.backgroundColors = const [AppColors.indigo500, AppColors.violet500],
     this.size = 40,
     this.iconColor,
   });

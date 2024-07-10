@@ -6,6 +6,11 @@ import 'package:go_router/go_router.dart';
 
 import '../utils/ui_strings.dart';
 
+/// AppBar con un campo de búsqueda que se anima para expandirse a lo ancho de la pantalla.
+///
+/// [screenWidth] El ancho de la pantalla
+///
+/// [onChanged] Función que se ejecuta cuando se ingresa texto
 class SearchAppBar extends StatefulWidget implements PreferredSizeWidget {
   final double screenWidth;
   final void Function(String value) onChanged;

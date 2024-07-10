@@ -5,7 +5,16 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../../../features/movies/domain/entities/movie.dart';
 import 'movie_item.dart';
-
+/// Un widget que muestra una lista de películas en una cuadrícula
+///
+/// [movies] Lista de películas a mostrar,
+///
+/// [loadNextPage] Función para cargar una siguiente página, esta función se ejecuta cuando falten 200 pixeles para
+/// que el usuario llegue al final de la lista
+///
+///[onClickMovie ] Una función que se llamará cuando se toque una película.
+///
+///[scrollPhysics] Controla cómo se comporta el desplazamiento de la cuadrícula.
 class MovieMasonry extends StatefulWidget {
   final List<Movie> movies;
   final VoidCallback? loadNextPage;

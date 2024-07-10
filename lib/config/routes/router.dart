@@ -10,6 +10,7 @@ import '../../features/actor_details/ui/screens/actor_details_screen.dart';
 import '../../features/configuration/ui/screens/configuration_screen.dart';
 import '../../features/movies/ui/screens/home_screen.dart';
 
+/// Configuración del enrutador de la aplicación utilizando GoRouter.
 final appRouter = GoRouter(
   initialLocation: AppRoutes.home,
   routes: [

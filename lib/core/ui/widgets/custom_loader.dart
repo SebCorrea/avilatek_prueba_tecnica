@@ -3,6 +3,9 @@ import 'dart:math';
 import 'package:avilatek_prueba_tecnica/config/theme/ui_extension.dart';
 import 'package:flutter/cupertino.dart';
 
+///Widget que muestra una animacion de carga
+///
+/// [size] Tamano del widget. Si no se especifica toma un tamano de 70.
 class CustomLoader extends StatefulWidget {
   final double size;
 
@@ -57,16 +60,16 @@ class _CustomLoaderState extends State<CustomLoader> with SingleTickerProviderSt
         );
       },
       child: CustomPaint(
-        painter: DrawRing(color: context.colorScheme.primary),
+        painter: _DrawRing(color: context.colorScheme.primary),
       ),
     );
   }
 }
 
-class DrawRing extends CustomPainter {
+class _DrawRing extends CustomPainter {
   final Color color;
 
-  const DrawRing({required this.color});
+  const _DrawRing({required this.color});
 
   @override
   void paint(Canvas canvas, Size size) {

@@ -7,6 +7,12 @@ import '../utils/ui_strings.dart';
 import '../../../features/movies/domain/entities/movie.dart';
 import 'custom_network_image.dart';
 
+
+/// Un widget que muestra información sobre una película, incluyendo su póster, título y puntuación.
+///
+/// [movie] Película a mostrar
+///
+/// [onClickMovie] Función que se ejecuta al hacer click en una película
 class MovieItem extends StatelessWidget {
   final Movie movie;
   final void Function(Movie movie) onClickMovie;

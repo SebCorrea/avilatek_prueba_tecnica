@@ -3,7 +3,11 @@ import 'package:avilatek_prueba_tecnica/core/ui/utils/ui_strings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
+/// Un campo de texto de búsqueda con un icono de búsqueda y un estilo personalizado.
+/// [onChanged] Una funciónque se llamará cuando el texto en el campo de búsqueda cambie.
+/// [autofocus] Si es verdadero, el campo de texto se enfocará automáticamente cuando se muestre el widget.
+/// [suffixIcon] Un widget que se mostrarácomo un icono de sufijo en el campo de texto.
+/// [focusNode] Un nodo de enfoque para controlar el enfoque del campo de texto.
 class SearchTextField extends StatelessWidget {
   final void Function(String value)? onChanged;
   final bool autofocus;

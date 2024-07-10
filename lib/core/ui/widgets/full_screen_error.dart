@@ -1,6 +1,11 @@
 import 'package:avilatek_prueba_tecnica/config/theme/ui_extension.dart';
 import 'package:flutter/material.dart';
 
+/// Un widget que muestra un mensaje de error a pantalla completa con un icono, un título y una descripción.
+///
+/// [errorMessage] Título del error
+///
+/// [errorDescription] Descripcion del error
 class FullScreenError extends StatelessWidget {
   final String errorMessage;
   final String errorDescription;

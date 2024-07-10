@@ -1,6 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
+/// Una página de transición personalizada que utiliza [FadeTransition] para animar la transición entre páginas.
+///
+/// [child] es la página que se animará.
+///
+/// [transitionDuration] es la duración de laanimación.
 class CustomFadeTransition extends CustomTransitionPage {
   CustomFadeTransition({
     required super.child,
@@ -18,7 +23,11 @@ class CustomFadeTransition extends CustomTransitionPage {
           ),
         );
 }
-
+/// Una página de transición personalizada que utiliza [SlideTransition] para animar la transición entre páginas.
+///
+/// [child] es la página que se animará.
+///
+/// [transitionDuration] es la duración de laanimación.
 class CustomSlideTransition extends CustomTransitionPage {
   CustomSlideTransition({
     required super.child,

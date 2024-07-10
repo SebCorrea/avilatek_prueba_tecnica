@@ -1,5 +1,10 @@
 import 'dart:ui';
 
+/// Clase que define los colores utilizados en la aplicación.
+///
+/// Esta clase proporciona constantes para cada color, organizados por categorías
+///(Neutrales, Primarios, Secundarios, Superficie, Error) para facilitar
+/// su uso y mantenimiento.
 class AppColors {
   /*Neutrals*/
   static const Color white100 = Color(0xffeeeeee);
@@ -27,10 +32,8 @@ class AppColors {
   static const Color red900 = Color(0xff7b2121);
   static const Color red950 = Color(0xff420d0d);
 
-
   /*Outlined*/
   static const Color gray400 = Color(0xffa1a1a1);
   static const Color white200 = Color(0xffd7d7d7);
   static const Color black700 = Color(0xff2c2c2c);
-
 }

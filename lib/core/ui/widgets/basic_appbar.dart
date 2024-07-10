@@ -1,6 +1,9 @@
 import 'package:avilatek_prueba_tecnica/config/theme/ui_extension.dart';
 import 'package:flutter/material.dart';
-
+/// AppBar básico de la aplicación
+/// [leading] Widget que se mostrará en la parte izquierda del Appbar
+/// [title] Texto utilizado como título del appbar
+/// [actions] Widgets que se mostrarán en la parte derecha del Appbar
 class BasicAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget? leading;
   final String? title;

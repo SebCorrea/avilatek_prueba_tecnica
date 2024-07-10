@@ -2,6 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
 
+/// Clase que define los esquemas de color de la aplicación para los modos claro y oscuro.
+///
+/// Proporciona dos esquemas decolor predefinidos:
+/// * `light()`: Esquema de color para el modo claro.
+/// * `dark()`: Esquema de color para el modo oscuro.
+///
+/// Cada esquema de color define una paleta de colores que se utilizan en toda la aplicación
+/// para garantizar una apariencia consistentey armoniosa.
 class AppColorScheme {
   static ColorScheme light() => const ColorScheme(
         brightness: Brightness.light,

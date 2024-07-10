@@ -1,6 +1,11 @@
 import 'package:avilatek_prueba_tecnica/config/theme/ui_extension.dart';
 import 'package:flutter/material.dart';
 
+/// Un widget que muestra un mensaje de error con un icono, un título y una descripción.
+///
+/// [title] El título del mensaje de error
+///
+/// [description] La descripción del error
 class ErrorMessage extends StatelessWidget {
   final String title;
   final String description;

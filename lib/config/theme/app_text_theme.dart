@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+/// Clase que define los estilos de texto de la aplicación.
+///
+/// El color de la fuente [fontColor] se puede personalizar a través del constructor.
 class AppTextTheme {
   final Color fontColor;
 

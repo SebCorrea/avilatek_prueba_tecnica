@@ -9,11 +9,19 @@ import 'package:dio/dio.dart';
 
 import '../../domain/entities/movie.dart';
 
+/// Implementación de [MovieDatasource] que obtiene datos de películas desdeuna API remota utilizando [Dio].
+///
+/// [_dio] Una instancia de [Dio] para realizar solicitudes HTTP.
 class MovieDatasourceImpl extends MovieDatasource {
   final Dio _dio;
 
   MovieDatasourceImpl({required Dio dio}) : _dio = dio;
 
+  /// Obtiene una lista de películas populares.
+  ///
+  /// [page] El número de página de resultados a obtener.
+  ///
+  /// Devuelve un [Result] que contiene la lista de películas en caso de éxito, o un [DataError] en caso de error.
   @override
   Future<Result<List<Movie>, DataError>> getPopularMovies(int page) async {
     try {
@@ -33,6 +41,11 @@ class MovieDatasourceImpl extends MovieDatasource {
     }
   }
 
+  /// Obtiene los detalles de una película por su ID.
+  ///
+  /// [id] El ID de la película.
+  ///
+  /// Devuelve un [Result] que contiene los detalles de la película en caso de éxito, o un [DataError] en caso de error.
   @override
   Future<Result<Movie, DataError>> getMovieById(int id) async {
     try {
@@ -47,6 +60,11 @@ class MovieDatasourceImpl extends MovieDatasource {
     }
   }
 
+  /// Obtiene una lista de películas en las que ha participado un actor.
+  ///
+  /// [id] El ID del actor.
+  ///
+  /// Devuelve un [Result] que contiene la lista de películas en caso de éxito, o un [DataError] en caso de error.
   @override
   Future<Result<List<Movie>, DataError>> getMoviesByActorId(int id) async {
     try {
@@ -61,6 +79,11 @@ class MovieDatasourceImpl extends MovieDatasource {
     }
   }
 
+  /// Obtiene una lista de películas mejor valoradas.
+  ///
+  /// [page] El número de página de resultados a obtener.
+  ///
+  /// Devuelve un [Result] que contiene la lista de películas en caso de éxito, o un [DataError] en caso de error.
   @override
   Future<Result<List<Movie>, DataError>> getTopRatedMovies(int page) async {
     try {
@@ -80,6 +103,11 @@ class MovieDatasourceImpl extends MovieDatasource {
     }
   }
 
+  /// Busca películas por título.
+  ///
+  /// [query] El término de búsqueda.
+  ///
+  /// Devuelve un [Result] que contiene la lista de películas encontradas en caso de éxito, o un [DataError] en caso de error.
   @override
   Future<Result<List<Movie>, DataError>> searchMovie(String query) async {
     try {
