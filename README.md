@@ -46,7 +46,7 @@ flutter pub get
 
 4. Renombrar el archivo ```.env.template``` a ```.env``` y llenar las variables de entorno respectivas
 
-<h3>Dependencias</h3>
+<h2>📦Dependencias</h2>
 
 - [dio: ^5.5.0+1](https://pub.dev/packages/dio)
 - [equatable: ^2.0.5](https://pub.dev/packages/equatable)
