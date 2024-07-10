@@ -5,7 +5,6 @@ import 'package:avilatek_prueba_tecnica/core/ui/widgets/circular_gradient_icon_b
 import 'package:avilatek_prueba_tecnica/core/ui/widgets/full_screen_error.dart';
 import 'package:avilatek_prueba_tecnica/core/ui/widgets/full_screen_loader.dart';
 import 'package:avilatek_prueba_tecnica/core/ui/widgets/movie_masonry.dart';
-import 'package:avilatek_prueba_tecnica/features/movies/ui/screens/search_movie_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -37,12 +36,7 @@ class HomeScreen extends StatelessWidget {
                 context.colorScheme.surface,
               ],
               iconData: Icons.search,
-              onClick: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const SearchMovieScreen(),
-                ),
-              ),
+              onClick: () => context.push(AppRoutes.search)
             )
           ],
         ),

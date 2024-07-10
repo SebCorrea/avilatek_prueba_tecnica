@@ -6,6 +6,6 @@ class AppRoutes {
   static const configuration = '/configuration';
   static const actor = '/actor';
   static const topRated = '/top-rated';
-
+  static const search = '/search';
 
 }

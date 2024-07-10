@@ -57,16 +57,16 @@ class _CustomLoaderState extends State<CustomLoader> with SingleTickerProviderSt
         );
       },
       child: CustomPaint(
-        painter: MakeCircle(color: context.colorScheme.primary),
+        painter: DrawRing(color: context.colorScheme.primary),
       ),
     );
   }
 }
 
-class MakeCircle extends CustomPainter {
+class DrawRing extends CustomPainter {
   final Color color;
 
-  const MakeCircle({required this.color});
+  const DrawRing({required this.color});
 
   @override
   void paint(Canvas canvas, Size size) {
